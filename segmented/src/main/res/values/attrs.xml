@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SegmentedButton">
+        <attr name="textSize" format="dimension"/>
+        <attr name="segmentHeight" format="dimension"/>
+        <attr name="textColor" format="color"/>
+        <attr name="textColorChecked" format="color"/>
+        <attr name="segmentColor" format="color"/>
+        <attr name="segmentColorChecked" format="color"/>
+        <attr name="rippleColor" format="color"/>
+        <attr name="rippleColorChecked" format="color"/>
+        <attr name="borderColor" format="color"/>
+        <attr name="borderWidth" format="dimension"/>
+        <attr name="cornerRadius" format="dimension"/>
+
+        <attr name="spreadType" format="enum">
+            <enum name="evenly" value="0"/>
+            <enum name="wrap" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
