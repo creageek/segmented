@@ -19,6 +19,7 @@ package com.creageek.segmentedbutton
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Paint
+import android.graphics.Typeface
 import android.graphics.drawable.*
 import android.graphics.drawable.shapes.RoundRectShape
 import android.util.AttributeSet
@@ -30,6 +31,7 @@ import android.widget.RadioGroup
 import android.widget.RadioGroup.LayoutParams.MATCH_PARENT
 import android.widget.RadioGroup.LayoutParams.WRAP_CONTENT
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import kotlin.math.roundToInt
 
 class SegmentedButton : RadioGroup, View.OnClickListener {
@@ -42,6 +44,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
     private val textColor: Int
     private val textColorSelected: Int
+    private var segmentFont: Typeface? = null
+    private var segmentFontChecked: Typeface? = null
 
     private val borderColor: Int
     private val borderWidth: Int
@@ -68,15 +72,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private var onSegmentReselected: ((segment: RadioButton) -> Unit)? = null
     private var onSegmentUnselected: ((segment: RadioButton) -> Unit)? = null
 
-    var initialSelection: Int? = null
-        set(value) {
-            value?.let {
-                field = value
-                selectedIndex = value
-                selectedChild = getChildAt(it) as? RadioButton
-                selectedChild?.isChecked = true
-            }
-        }
+    var initialCheckedIndex: Int? = null
 
     constructor(context: Context) : this(context, null)
 
@@ -158,6 +154,18 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             borderInnerWidth = (borderWidth / 2f).roundToInt()
             rI = r - borderInnerWidth
 
+            val segmentFontId = getResourceId(R.styleable.SegmentedButton_segmentFont, -1)
+            if (segmentFontId != -1) {
+                segmentFont = ResourcesCompat.getFont(context, segmentFontId)
+            }
+
+            val segmentFontCheckedId = getResourceId(R.styleable.SegmentedButton_segmentFontChecked, -1)
+            if (segmentFontCheckedId != -1) {
+                segmentFontChecked = ResourcesCompat.getFont(context, segmentFontCheckedId)
+            } else if (segmentFontId != -1) {
+                segmentFontChecked = segmentFont
+            }
+
             recycle()
         }
     }
@@ -174,8 +182,10 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             if (selectedIndex == indexOf) {
                 onSegmentReselected?.invoke(selected)
             } else {
+                selected.typeface = segmentFontChecked
                 onSegmentSelected?.invoke(selected)
                 selectedChild?.let { unselected ->
+                    unselected.typeface = segmentFont
                     onSegmentUnselected?.invoke(unselected)
                 }
                 selectedChild = selected
@@ -210,6 +220,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         includeRipple: Boolean
     ): RadioButton {
         this.setTextSize(TypedValue.COMPLEX_UNIT_PX, this@SegmentedButton.textSize.toFloat())
+        this.typeface = segmentFont
 
         val state = buildSegmentStateDrawable(
             type,
@@ -315,7 +326,20 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             }
         }
 
-    operator fun invoke(block: SegmentedButton.() -> Unit) = block()
+    // move initail checked item initialization to the invoke block in order fo make it order-independent
+    private fun setInitialCheckedItem() {
+        initialCheckedIndex?.let {
+            selectedIndex = it
+            selectedChild = getChildAt(it) as? RadioButton
+            selectedChild?.isChecked = true
+            selectedChild?.typeface = segmentFontChecked
+        }
+    }
+
+    operator fun invoke(block: SegmentedButton.() -> Unit) = run {
+        block()
+        setInitialCheckedItem()
+    }
 
     fun onSegmentChecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
         onSegmentSelected = { block(it) }

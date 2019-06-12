@@ -4,9 +4,9 @@
     <color name="default_text_color_checked">#ffffff</color>
 
     <color name="default_segment_color">#f8f8f8</color>
-    <color name="default_segment_color_checked">#9E7682</color>
+    <color name="default_segment_color_checked">#7F6A93</color>
 
-    <color name="default_ripple_color">#80e4e4e4</color>
+    <color name="default_ripple_color">#e4e4e4</color>
     <color name="default_ripple_color_checked">#C695A4</color>
 
     <color name="default_border_color">#e4e4e4</color>
