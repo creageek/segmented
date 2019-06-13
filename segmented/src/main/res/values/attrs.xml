@@ -12,6 +12,8 @@
         <attr name="borderColor" format="color"/>
         <attr name="borderWidth" format="dimension"/>
         <attr name="cornerRadius" format="dimension"/>
+        <attr name="segmentFont" format="reference"/>
+        <attr name="segmentFontChecked" format="reference"/>
 
         <attr name="spreadType" format="enum">
             <enum name="evenly" value="0"/>
