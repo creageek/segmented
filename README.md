@@ -3,7 +3,7 @@
 
 A simple Android UI library for segmented controls with material-ish styling.
 
-[![](https://jitpack.io/v/creageek/segmented.svg)](https://jitpack.io/#creageek/segmented)
+[![](https://jitpack.io/v/creageek/segmented.svg)](https://jitpack.io/#creageek/segmented) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-segmented-green.svg?style=flat )]( https://android-arsenal.com/details/1/7706 )
 ## How to add?
 I. In your root `build.gradle` file add the following:
 ```
@@ -17,7 +17,7 @@ allprojects {
 II. In your `build.gradle` file add the following dependency:
 ```
 dependencies {
-    implementation 'com.github.creageek:segmented:1.0.0-rc'
+    implementation 'com.github.creageek:segmented:1.0.0'
 }
 ```
 III. Declare `SegmentedButton` inside your `layout.xml` file:
@@ -38,8 +38,8 @@ You can call the view by its id with the power of `kotlin-android-extensions` pl
 ```kotlin
 segmented {
 
-        // set initial selection (no selection by default)
-        initialSelection = 0
+        // set initial checked segment (null by default)
+        initialCheckedIndex = 0
 
         // init with segments programmatically without RadioButton as a child in xml
         initWithItems {
@@ -67,6 +67,8 @@ I. In your `layout.xml` file you can set a few attrs to `SegmentedButton`:
 * `app:segmentHeight` - allows you to set segment height (reference to a dimension).
 * `app:textColor` - allows you to set text color (reference to a color).
 * `app:textColorChecked` - allows you to set the text color of a checked segment (reference to a color).
+* `app:segmentFont` - allows you to set a segment's font (reference to a font).
+* `app:segmentFontChecked` - allows you to set the font of a checked segment (reference to a font).
 * `app:segmentColor` - allows you to set segment color (reference to a color).
 * `app:segmentColorChecked` - allows you to set the color of a checked segment (reference to a color).
 * `app:rippleColor` - allows you to set a segment's ripple color (reference to a color).
@@ -86,9 +88,9 @@ II. By default, if no custom attrs set, these values applied:
     <color name="default_text_color_checked">#ffffff</color>
 
     <color name="default_segment_color">#f8f8f8</color>
-    <color name="default_segment_color_checked">#9e7682</color>
+    <color name="default_segment_color_checked">#7f6a93</color>
 
-    <color name="default_ripple_color">#80e4e4e4</color>
+    <color name="default_ripple_color">#e4e4e4</color>
     <color name="default_ripple_color_checked">#c695a4</color>
 
     <color name="default_border_color">#e4e4e4</color>
@@ -99,7 +101,7 @@ II. By default, if no custom attrs set, these values applied:
 <resources>
     <dimen name="compound_drawable_size">24dp</dimen>
     <dimen name="default_segment_text_size">16sp</dimen>
-    <dimen name="default_segment_height">48sp</dimen>
+    <dimen name="default_segment_height">48dp</dimen>
     <dimen name="default_border_width">1dp</dimen>
     <dimen name="default_corner_radius">8dp</dimen>
 </resources>
