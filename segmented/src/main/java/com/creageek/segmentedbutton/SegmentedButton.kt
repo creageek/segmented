@@ -65,8 +65,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private val stateChecked = intArrayOf(android.R.attr.state_checked)
     private val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
 
-    private var selectedIndex: Int? = null
-    private var selectedChild: RadioButton? = null
+    private var checkedIndex: Int? = null
+    private var checkedChild: RadioButton? = null
 
     private var onSegmentSelected: ((segment: RadioButton) -> Unit)? = null
     private var onSegmentReselected: ((segment: RadioButton) -> Unit)? = null
@@ -179,17 +179,17 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         (v as? RadioButton)?.let { selected ->
             val indexOf = indexOfChild(selected)
 
-            if (selectedIndex == indexOf) {
+            if (checkedIndex == indexOf) {
                 onSegmentReselected?.invoke(selected)
             } else {
                 selected.typeface = segmentFontChecked
                 onSegmentSelected?.invoke(selected)
-                selectedChild?.let { unselected ->
+                checkedChild?.let { unselected ->
                     unselected.typeface = segmentFont
                     onSegmentUnselected?.invoke(unselected)
                 }
-                selectedChild = selected
-                selectedIndex = indexOf
+                checkedChild = selected
+                checkedIndex = indexOf
             }
         }
     }
@@ -326,13 +326,25 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             }
         }
 
-    // move initail checked item initialization to the invoke block in order fo make it order-independent
+    // move initial checked item initialization to the invoke block in order fo make it order-independent
     private fun setInitialCheckedItem() {
         initialCheckedIndex?.let {
-            selectedIndex = it
-            selectedChild = getChildAt(it) as? RadioButton
-            selectedChild?.isChecked = true
-            selectedChild?.typeface = segmentFontChecked
+
+            // reset previously checked segment font to unchecked state
+            resetPreviousSegmentFontStateIfExists(checkedIndex)
+
+            checkedIndex = it
+            checkedChild = getChildAt(it) as? RadioButton
+            checkedChild?.isChecked = true
+            checkedChild?.typeface = segmentFontChecked
+        }
+    }
+
+    private fun resetPreviousSegmentFontStateIfExists(selectedIndex: Int?) {
+        selectedIndex?.let {
+            (getChildAt(it) as? RadioButton)?.apply {
+                typeface = segmentFont
+            }
         }
     }
 
@@ -354,6 +366,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     }
 
     fun initWithItems(block: SegmentedButton.() -> List<String>) {
+        // removing all views in order to prevent duplications which was mentioned by some of the developers
+        removeAllViews()
         block().forEach {
             val segment = RadioButton(context)
             segment.text = it

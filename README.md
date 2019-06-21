@@ -1,6 +1,6 @@
-# segmented
-<img src="https://github.com/creageek/segmented/blob/master/graphics/sample.png" width="360" max-width="360px">
+<img align="right" width="300" src="https://github.com/creageek/segmented/blob/master/graphics/sample.png">
 
+# segmented
 A simple Android UI library for segmented controls with material-ish styling.
 
 [![](https://jitpack.io/v/creageek/segmented.svg)](https://jitpack.io/#creageek/segmented) [![Android Arsenal]( https://img.shields.io/badge/Android%20Arsenal-segmented-green.svg?style=flat )]( https://android-arsenal.com/details/1/7706 )
