@@ -17,9 +17,12 @@
 package com.creageek.segmentedbutton
 
 import android.content.res.Resources
+import android.view.View
 
 inline fun <R> R?.orElse(block: () -> R): R {
     return this ?: block()
 }
 
 fun Float.toPx() = (this * Resources.getSystem().displayMetrics.density)
+
+typealias SegmentAction = (segment: View) -> Unit
