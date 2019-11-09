@@ -8,4 +8,92 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="Segmented_Courses" />
+
+    <style name="Segmented_Courses.Strip">
+        <item name="android:orientation">horizontal</item>
+        <item name="borderColor">#9ABCA7</item>
+        <item name="rippleColorChecked">#ffffff</item>
+        <item name="segmentColorChecked">#9ABCA7</item>
+        <item name="spreadType">evenly</item>
+    </style>
+
+    <style name="Segmented_Courses.Segment">
+        <item name="textColor">#9ABCA7</item>
+    </style>
+
+    <style name="Segmented_Filter" />
+
+    <style name="Segmented_Filter.Strip">
+        <item name="android:orientation">horizontal</item>
+        <item name="borderWidth">4dp</item>
+        <item name="borderColor">#E9724C</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="spreadType">evenly</item>
+        <item name="rippleColorChecked">#FFC857</item>
+        <item name="segmentColor">#FFC857</item>
+        <item name="segmentColorChecked">#E9724C</item>
+    </style>
+
+    <style name="Segmented_Filter.Segment">
+        <item name="textColor">#E9724C</item>
+        <item name="textColorChecked">#FFC857</item>
+    </style>
+
+    <style name="Segmented_Rounded" />
+
+    <style name="Segmented_Rounded.Strip">
+        <item name="android:orientation">horizontal</item>
+        <item name="borderWidth">0dp</item>
+        <item name="cornerRadius">24dp</item>
+        <item name="spreadType">evenly</item>
+        <item name="rippleColorChecked">#6DAEDB</item>
+        <item name="segmentColor">#6DAEDB</item>
+        <item name="segmentColorChecked">#1D70A2</item>
+    </style>
+
+    <style name="Segmented_Rounded.Segment">
+        <item name="textColor">#ffffff</item>
+        <item name="textColorChecked">#ffffff</item>
+    </style>
+
+    <style name="Segmented_Wrapped" />
+
+    <style name="Segmented_Wrapped.Strip">
+        <item name="android:orientation">horizontal</item>
+        <item name="borderWidth">2dp</item>
+        <item name="borderColor">#E9806E</item>
+        <item name="cornerRadius">10dp</item>
+        <item name="spreadType">wrap</item>
+        <item name="rippleColorChecked">#FFE66D</item>
+        <item name="segmentColor">#FFE66D</item>
+        <item name="segmentColorChecked">#8EA604</item>
+    </style>
+
+    <style name="Segmented_Wrapped.Segment">
+        <item name="textColorChecked">#F7FFF7</item>
+    </style>
+
+
+    <style name="Segmented" />
+
+    <style name="Segmented.Strip">
+        <item name="android:orientation">horizontal</item>
+        <item name="borderWidth">0dp</item>
+        <item name="spreadType">evenly</item>
+        <item name="segmentColor">#e9e9e2</item>
+        <item name="segmentColorChecked">#57634b</item>
+        <item name="segmentHeight">76dp</item>
+    </style>
+
+    <style name="Segmented.Segment">
+        <item name="android:orientation">horizontal</item>
+        <item name="borderWidth">0dp</item>
+        <item name="spreadType">evenly</item>
+        <item name="segmentColor">#e9e9e2</item>
+        <item name="segmentColorChecked">#57634b</item>
+        <item name="segmentHeight">76dp</item>
+    </style>
+
 </resources>
+

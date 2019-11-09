@@ -18,73 +18,64 @@ package com.creageek.segmentedbutton
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Paint
-import android.graphics.Typeface
-import android.graphics.drawable.*
-import android.graphics.drawable.shapes.RoundRectShape
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.Gravity.CENTER
-import android.view.View
-import android.widget.LinearLayout
 import android.widget.RadioButton
-import android.widget.RadioGroup
-import android.widget.RadioGroup.LayoutParams.MATCH_PARENT
-import android.widget.RadioGroup.LayoutParams.WRAP_CONTENT
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import kotlin.math.roundToInt
 
 class TextSegment : RadioButton, Segment {
-    private val textSize: Int
 
-    private val textColor: Int
-    private val textColorSelected: Int
-    private var segmentFont: Typeface? = null
-    private var segmentFontChecked: Typeface? = null
-
-    constructor(context: Context) : this(context, null)
-
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs){
-
-        val a = context.theme.obtainStyledAttributes(
-            attrs,
-            R.styleable.SegmentedButton,
-            0, 0
-        )
-
-        with(a) {
-
-            textSize = getDimensionPixelSize(
-                R.styleable.SegmentedButton_textSize,
-                context.resources.getDimensionPixelSize(R.dimen.default_segment_text_size)
-            )
-
-            textColor = getColor(
-                R.styleable.SegmentedButton_textColor,
-                ContextCompat.getColor(context, R.color.default_text_color)
-            )
-
-            textColorSelected = getColor(
-                R.styleable.SegmentedButton_textColorChecked,
-                ContextCompat.getColor(context, R.color.default_text_color_checked)
-            )
-
-            val segmentFontId = getResourceId(R.styleable.SegmentedButton_segmentFont, -1)
-            if (segmentFontId != -1) {
-                segmentFont = ResourcesCompat.getFont(context, segmentFontId)
-            }
-
-            val segmentFontCheckedId = getResourceId(R.styleable.SegmentedButton_segmentFontChecked, -1)
-            if (segmentFontCheckedId != -1) {
-                segmentFontChecked = ResourcesCompat.getFont(context, segmentFontCheckedId)
-            } else if (segmentFontId != -1) {
-                segmentFontChecked = segmentFont
-            }
-
-            recycle()
+    override fun onStateChanged(isChecked: Boolean) {
+        isSelected = isChecked
+        typeface = if (isChecked) {
+            segmentStyle.segmentFontChecked
+        } else {
+            segmentStyle.segmentFont
         }
     }
 
+    private val segmentStyle: SegmentStyle
+
+    constructor(context: Context, style: StripStyle) : this(context, null) {
+        attachStripStyle(style)
+        initSegment()
+    }
+
+    constructor(context: Context) : this(context, null)
+
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
+
+        segmentStyle = context.theme.obtainStyledAttributes(
+            attrs,
+            R.styleable.SegmentedButton,
+            0, 0
+        ).toSegmentStyle(context)
+
+        initSegment()
+    }
+
+    fun initSegment() {
+        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, segmentStyle.textSize.toFloat())
+        this.typeface = segmentStyle.segmentFont
+
+
+        val textState =
+            buildTextColorStateList(segmentStyle.textColor, segmentStyle.textColorSelected)
+
+        setTextColor(textState)
+    }
+
+    fun buildTextColorStateList(color: Int, colorSelected: Int) = ColorStateList(
+        arrayOf(
+            segmentStyle.stateUnselected,
+            segmentStyle.stateSelected
+        ), intArrayOf(color, colorSelected)
+    )
+
+    fun attachStripStyle(style: StripStyle) {
+        segmentStyle.textSize = style.textSize
+        segmentStyle.textColor = style.textColor
+        segmentStyle.textColorSelected = style.textColorSelected
+        segmentStyle.segmentFont = style.segmentFont
+        segmentStyle.segmentFontChecked = style.segmentFontChecked
+    }
 }

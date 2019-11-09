@@ -131,12 +131,67 @@
     </com.creageek.segmentedbutton.SegmentedButton>
 
     <com.creageek.segmentedbutton.SegmentedButton
-            android:id="@+id/segmented"
-            android:layout_width="match_parent"
+        android:id="@+id/segmented"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:segmentFont="@font/kalam_light"
+        app:segmentFontChecked="@font/kalam_bold"
+        app:spreadType="evenly" />
+
+    <com.creageek.segmentedbutton.SegmentedButton
+        android:id="@+id/subtitled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal"
+        app:borderWidth="0dp"
+        app:segmentColor="#e9e9e2"
+        app:segmentColorChecked="#57634b"
+        app:segmentHeight="76dp"
+        app:spreadType="evenly">
+
+        <com.creageek.segmentedbutton.SubtitleSegment
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:segmentFont="@font/kalam_light"
-            app:segmentFontChecked="@font/kalam_bold"
-            app:spreadType="evenly"/>
+            android:paddingStart="16dp"
+            android:paddingTop="6dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="6dp"
+            app:segmentFont="@font/metric_app_regular"
+            app:segmentFontChecked="@font/metric_app_semibold"
+            app:subTitle="Du skal være hjemme"
+            app:subTitlePosition="start"
+            app:subTitleSegmentFont="@font/metric_app_light_italic"
+            app:subTitleTextSize="13sp"
+            app:textSize="16sp"
+            app:title="Personlig"
+            app:titlePosition="start"
+            app:upperTitle="fra 24,-"
+            app:upperTitlePosition="end"
+            app:upperTitleSegmentFont="@font/metric_app_light_italic"
+            app:upperTitleTextSize="14sp" />
+
+        <com.creageek.segmentedbutton.SubtitleSegment
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            app:segmentFont="@font/metric_app_regular"
+            app:segmentFontChecked="@font/metric_app_semibold"
+            app:subTitle="Du behøver ikke være hjemme"
+            app:subTitlePosition="start"
+            app:subTitleSegmentFont="@font/metric_app_light_italic"
+            app:subTitleTextSize="13sp"
+            app:textSize="16sp"
+            app:title="Fleksibel"
+            app:titlePosition="start"
+            app:upperTitle="fra 19,-"
+            app:upperTitlePosition="end"
+            app:upperTitleSegmentFont="@font/metric_app_light_italic"
+            app:upperTitleTextSize="14sp" />
+    </com.creageek.segmentedbutton.SegmentedButton>
 </LinearLayout>

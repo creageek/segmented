@@ -26,7 +26,6 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity.CENTER
 import android.view.View
-import android.widget.RadioButton
 import android.widget.RadioGroup
 import android.widget.RadioGroup.LayoutParams.MATCH_PARENT
 import android.widget.RadioGroup.LayoutParams.WRAP_CONTENT
@@ -66,11 +65,11 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
 
     private var checkedIndex: Int? = null
-    private var checkedChild: RadioButton? = null
+    private var checkedChild: Segment? = null
 
-    private var onSegmentSelected: ((segment: RadioButton) -> Unit)? = null
-    private var onSegmentReselected: ((segment: RadioButton) -> Unit)? = null
-    private var onSegmentUnselected: ((segment: RadioButton) -> Unit)? = null
+    private var onSegmentSelected: ((segment: Segment) -> Unit)? = null
+    private var onSegmentReselected: ((segment: Segment) -> Unit)? = null
+    private var onSegmentUnselected: ((segment: Segment) -> Unit)? = null
 
     var initialCheckedIndex: Int? = null
 
@@ -176,8 +175,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        (v as? RadioButton)?.let { selected ->
-            val indexOf = indexOfChild(selected)
+        (v as? Segment)?.let { selected ->
+            val indexOf = indexOfChild(v)
 
             if (checkedIndex == indexOf) {
                 onSegmentReselected?.invoke(selected)
@@ -353,15 +352,15 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         setInitialCheckedItem()
     }
 
-    fun onSegmentChecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
+    fun onSegmentChecked(block: SegmentedButton.(segment: Segment) -> Unit) {
         onSegmentSelected = { block(it) }
     }
 
-    fun onSegmentRechecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
+    fun onSegmentRechecked(block: SegmentedButton.(segment: Segment) -> Unit) {
         onSegmentReselected = { block(it) }
     }
 
-    fun onSegmentUnchecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
+    fun onSegmentUnchecked(block: SegmentedButton.(segment: Segment) -> Unit) {
         onSegmentUnselected = { block(it) }
     }
 

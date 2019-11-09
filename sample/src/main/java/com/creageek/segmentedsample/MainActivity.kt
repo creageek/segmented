@@ -24,15 +24,15 @@ class MainActivity : AppCompatActivity() {
 
             // notifies when segment was checked
             onSegmentChecked { segment ->
-                Log.d("creageek:segmented", "TextSegment ${segment.text} checked")
+                Log.d("creageek:segmented", "TextSegment ${segment} checked")
             }
             // notifies when segment was unchecked
             onSegmentUnchecked { segment ->
-                Log.d("creageek:segmented", "TextSegment ${segment.text} unchecked")
+                Log.d("creageek:segmented", "TextSegment ${segment} unchecked")
             }
             // notifies when segment was rechecked
             onSegmentRechecked { segment ->
-                Log.d("creageek:segmented", "TextSegment ${segment.text} rechecked")
+                Log.d("creageek:segmented", "TextSegment ${segment} rechecked")
             }
         }
 
