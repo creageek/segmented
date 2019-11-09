@@ -1,133 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <com.creageek.segmentedbutton.SegmentedButton
+        android:id="@+id/courses"
+        style="@style/Segmented_Courses.Strip"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".MainActivity">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
-    <com.creageek.segmentedbutton.SegmentedButton
-            android:id="@+id/courses"
-            android:layout_width="match_parent"
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Courses.Segment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:borderColor="#9ABCA7"
-            app:rippleColorChecked="#ffffff"
-            app:segmentColorChecked="#9ABCA7"
-            app:spreadType="evenly"
-            app:textColor="#9ABCA7">
+            android:text="Newest" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Newest"/>
-
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Top Rated"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Courses.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Top Rated" />
     </com.creageek.segmentedbutton.SegmentedButton>
 
     <com.creageek.segmentedbutton.SegmentedButton
-            android:id="@+id/filter"
-            android:layout_width="match_parent"
+        android:id="@+id/filter"
+        style="@style/Segmented_Filter.Strip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Filter.Segment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:borderColor="#E9724C"
-            app:borderWidth="4dp"
-            app:cornerRadius="0dp"
-            app:segmentColor="#FFC857"
-            app:segmentColorChecked="#E9724C"
-            app:rippleColorChecked="#FFC857"
-            app:spreadType="evenly"
-            app:textColor="#E9724C"
-            app:textColorChecked="#FFC857">
+            android:text="Today" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Today"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Filter.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tomorrow" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tomorrow"/>
-
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="This week"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Filter.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="This week" />
     </com.creageek.segmentedbutton.SegmentedButton>
 
     <com.creageek.segmentedbutton.SegmentedButton
-            android:id="@+id/rounded"
-            android:layout_width="match_parent"
+        android:id="@+id/rounded"
+        style="@style/Segmented_Rounded.Strip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Rounded.Segment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:rippleColorChecked="#6DAEDB"
-            app:borderWidth="0dp"
-            app:cornerRadius="24dp"
-            app:segmentColor="#6DAEDB"
-            app:segmentColorChecked="#1D70A2"
-            app:spreadType="evenly"
-            app:textColor="#ffffff"
-            app:textColorChecked="#ffffff">
+            android:text="S1" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="S1"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Rounded.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S2" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="S2"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Rounded.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S3" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="S3"/>
-
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="S4"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Rounded.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S4" />
     </com.creageek.segmentedbutton.SegmentedButton>
 
     <com.creageek.segmentedbutton.SegmentedButton
-            android:id="@+id/wrapped"
-            android:layout_width="match_parent"
+        android:id="@+id/wrapped"
+        style="@style/Segmented_Wrapped.Strip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
+
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Wrapped.Segment"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            app:borderColor="#E9806E"
-            app:borderWidth="2dp"
-            app:rippleColorChecked="#FFE66D" app:cornerRadius="10dp"
-            app:segmentColor="#FFE66D"
-            app:segmentColorChecked="#8EA604"
-            app:spreadType="wrap"
-            app:textColorChecked="#F7FFF7">
+            android:text="First" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="First"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Wrapped.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Center" />
 
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Center"/>
-
-        <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Laaaaaaaaast"/>
+        <com.creageek.segmentedbutton.TextSegment
+            style="@style/Segmented_Wrapped.Segment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Laaaaaaaaast" />
     </com.creageek.segmentedbutton.SegmentedButton>
 
     <com.creageek.segmentedbutton.SegmentedButton

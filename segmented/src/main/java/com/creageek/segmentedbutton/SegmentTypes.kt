@@ -18,11 +18,11 @@ package com.creageek.segmentedbutton
 
 import android.view.Gravity
 
-internal enum class SegmentType {
+enum class SegmentType {
     first, center, last, only
 }
 
-internal enum class SegmentSpreadType(val value: Int) {
+enum class SegmentSpreadType(val value: Int) {
     evenly(0), wrap(1)
 }
 

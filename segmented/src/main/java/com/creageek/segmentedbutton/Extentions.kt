@@ -16,10 +16,36 @@
 
 package com.creageek.segmentedbutton
 
+import android.content.Context
 import android.content.res.Resources
+import android.content.res.TypedArray
+import android.graphics.Typeface
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 
 inline fun <R> R?.orElse(block: () -> R): R {
     return this ?: block()
 }
 
 fun Float.toPx() = (this * Resources.getSystem().displayMetrics.density)
+
+
+fun TypedArray.getDimensInPixel(context: Context, styleableId: Int, defaultDimen: Int) =
+    getDimensionPixelSize(styleableId, context.resources.getDimensionPixelSize(defaultDimen))
+
+fun TypedArray.getColor(context: Context, styleableId: Int, defaultColor: Int) =
+    getColor(styleableId, ContextCompat.getColor(context, defaultColor))
+
+fun TypedArray.getFont(
+    context: Context,
+    styleableId: Int,
+    defaultFont: Typeface? = null
+): Typeface? {
+    val titleFontId = getResourceId(styleableId, -1)
+    return if (titleFontId != -1) {
+        ResourcesCompat.getFont(context, titleFontId)
+    } else {
+        defaultFont
+    }
+}
+
