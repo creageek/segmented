@@ -16,10 +16,28 @@
 
 package com.creageek.segmentedbutton
 
+import android.view.Gravity
+
 internal enum class SegmentType {
     first, center, last, only
 }
 
 internal enum class SegmentSpreadType(val value: Int) {
     evenly(0), wrap(1)
+}
+
+enum class TextPosition(val value: Int) {
+    start(0), center(1), end(2)
+}
+
+fun TextPosition.toGravity() = when (this) {
+    TextPosition.start -> {
+        Gravity.START
+    }
+    TextPosition.center -> {
+        Gravity.CENTER_HORIZONTAL
+    }
+    TextPosition.end -> {
+        Gravity.END
+    }
 }
