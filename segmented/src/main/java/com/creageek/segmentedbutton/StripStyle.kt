@@ -60,6 +60,10 @@ data class SegmentStyle(
 
 data class SubtitleSegmentStyle(
 
+    var titleType: TextType = TextType.multiline,
+    var subTitleType: TextType = TextType.multiline,
+    var upperTitleType: TextType = TextType.multiline,
+
     var titlePosition: TextPosition = TextPosition.start,
     var subTitlePosition: TextPosition = TextPosition.start,
     var upperTitlePosition: TextPosition = TextPosition.start,
@@ -237,6 +241,24 @@ fun TypedArray.toSegmentStyle(context: Context) = SegmentStyle().apply {
 
 
 fun TypedArray.toSubtitleSegmentStyle(context: Context) = SubtitleSegmentStyle().apply {
+
+    titleType =
+        TextType.values()[getInt(
+            R.styleable.SegmentedButton_titleType,
+            TextType.multiline.value
+        )]
+
+    subTitleType =
+        TextType.values()[getInt(
+            R.styleable.SegmentedButton_subTitleType,
+            TextType.multiline.value
+        )]
+
+    upperTitleType =
+        TextType.values()[getInt(
+            R.styleable.SegmentedButton_upperTitleType,
+            TextType.multiline.value
+        )]
 
     titlePosition =
         TextPosition.values()[getInt(

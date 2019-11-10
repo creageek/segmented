@@ -34,6 +34,10 @@ enum class SegmentGravity(val value: Int) {
     top(0), center(1), bottom(2)
 }
 
+enum class TextType(val value: Int) {
+    multiline(0), truncated(1)
+}
+
 fun TextPosition.toGravity() = when (this) {
     TextPosition.start -> {
         Gravity.START

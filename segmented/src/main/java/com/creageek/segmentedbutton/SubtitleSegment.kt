@@ -18,6 +18,7 @@ package com.creageek.segmentedbutton
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.LinearLayout
@@ -93,7 +94,22 @@ class SubtitleSegment : LinearLayout, Segment {
                     TypedValue.COMPLEX_UNIT_PX,
                     subtitleSegmentStyle.upperTitleTextSize.toFloat()
                 )
+
+                when(subtitleSegmentStyle.upperTitleType){
+                    TextType.multiline -> {
+                        maxLines = Int.MAX_VALUE
+                        ellipsize = null
+                    }
+                    TextType.truncated -> {
+                        maxLines = 1
+                        ellipsize = TextUtils.TruncateAt.END
+                    }
+                }
+
                 typeface = subtitleSegmentStyle.upperTitleFont
+
+
+
 //                includeFontPadding = false
             }
             addView(upperText)
@@ -116,6 +132,19 @@ class SubtitleSegment : LinearLayout, Segment {
                     TypedValue.COMPLEX_UNIT_PX,
                     subtitleSegmentStyle.textSize.toFloat()
                 )
+
+
+                when(subtitleSegmentStyle.titleType){
+                    TextType.multiline -> {
+                        maxLines = Int.MAX_VALUE
+                        ellipsize = null
+                    }
+                    TextType.truncated -> {
+                        maxLines = 1
+                        ellipsize = TextUtils.TruncateAt.END
+                    }
+                }
+
                 typeface = subtitleSegmentStyle.titleFont
 //                includeFontPadding = false
             }
@@ -140,6 +169,18 @@ class SubtitleSegment : LinearLayout, Segment {
                     TypedValue.COMPLEX_UNIT_PX,
                     subtitleSegmentStyle.subTitleTextSize.toFloat()
                 )
+
+                when(subtitleSegmentStyle.subTitleType){
+                    TextType.multiline -> {
+                        maxLines = Int.MAX_VALUE
+                        ellipsize = null
+                    }
+                    TextType.truncated -> {
+                        maxLines = 1
+                        ellipsize = TextUtils.TruncateAt.END
+                    }
+                }
+
                 typeface = subtitleSegmentStyle.subTitleFont
 //                includeFontPadding = false
             }

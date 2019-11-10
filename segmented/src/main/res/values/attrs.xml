@@ -45,6 +45,21 @@
             <enum name="end" value="2" />
         </attr>
 
+        <attr name="titleType" format="enum">
+            <enum name="multiline" value="0" />
+            <enum name="truncated" value="1" />
+        </attr>
+
+        <attr name="upperTitleType" format="enum">
+            <enum name="multiline" value="0" />
+            <enum name="truncated" value="1" />
+        </attr>
+
+        <attr name="subTitleType" format="enum">
+            <enum name="multiline" value="0" />
+            <enum name="truncated" value="1" />
+        </attr>
+
         <attr name="textSize" format="dimension" />
         <attr name="subTitleTextSize" format="dimension" />
         <attr name="upperTitleTextSize" format="dimension" />
