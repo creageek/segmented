@@ -30,6 +30,10 @@ enum class TextPosition(val value: Int) {
     start(0), center(1), end(2)
 }
 
+enum class SegmentGravity(val value: Int) {
+    top(0), center(1), bottom(2)
+}
+
 fun TextPosition.toGravity() = when (this) {
     TextPosition.start -> {
         Gravity.START
@@ -39,5 +43,17 @@ fun TextPosition.toGravity() = when (this) {
     }
     TextPosition.end -> {
         Gravity.END
+    }
+}
+
+fun SegmentGravity.toGravity() = when (this) {
+    SegmentGravity.top -> {
+        Gravity.TOP
+    }
+    SegmentGravity.center -> {
+        Gravity.CENTER_VERTICAL
+    }
+    SegmentGravity.bottom -> {
+        Gravity.BOTTOM
     }
 }

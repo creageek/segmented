@@ -29,9 +29,9 @@ class SubtitleSegment : LinearLayout, Segment {
     private var subText: TextView? = null
     private var upperText: TextView? = null
 
-    override fun onStateChanged(isChecked: Boolean) {
-        isSelected = isChecked
-        if (isChecked) {
+    override fun onStateChanged(state: SegmentState) {
+        isSelected = state.value
+        if (state.value) {
             upperText?.typeface = subtitleSegmentStyle.upperTitleFontChecked
             text?.typeface = subtitleSegmentStyle.titleFontChecked
             subText?.typeface = subtitleSegmentStyle.subTitleFontChecked
@@ -94,7 +94,7 @@ class SubtitleSegment : LinearLayout, Segment {
                     subtitleSegmentStyle.upperTitleTextSize.toFloat()
                 )
                 typeface = subtitleSegmentStyle.upperTitleFont
-                includeFontPadding = false
+//                includeFontPadding = false
             }
             addView(upperText)
         }
@@ -117,7 +117,7 @@ class SubtitleSegment : LinearLayout, Segment {
                     subtitleSegmentStyle.textSize.toFloat()
                 )
                 typeface = subtitleSegmentStyle.titleFont
-                includeFontPadding = false
+//                includeFontPadding = false
             }
             addView(text)
 
@@ -141,7 +141,7 @@ class SubtitleSegment : LinearLayout, Segment {
                     subtitleSegmentStyle.subTitleTextSize.toFloat()
                 )
                 typeface = subtitleSegmentStyle.subTitleFont
-                includeFontPadding = false
+//                includeFontPadding = false
             }
 
             addView(subText)

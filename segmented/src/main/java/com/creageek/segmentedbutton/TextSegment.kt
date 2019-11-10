@@ -24,9 +24,9 @@ import android.widget.RadioButton
 
 class TextSegment : RadioButton, Segment {
 
-    override fun onStateChanged(isChecked: Boolean) {
-        isSelected = isChecked
-        typeface = if (isChecked) {
+    override fun onStateChanged(state: SegmentState) {
+        isSelected = state.value
+        typeface = if (state.value) {
             segmentStyle.segmentFontChecked
         } else {
             segmentStyle.segmentFont

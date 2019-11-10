@@ -29,7 +29,6 @@ inline fun <R> R?.orElse(block: () -> R): R {
 
 fun Float.toPx() = (this * Resources.getSystem().displayMetrics.density)
 
-
 fun TypedArray.getDimensInPixel(context: Context, styleableId: Int, defaultDimen: Int) =
     getDimensionPixelSize(styleableId, context.resources.getDimensionPixelSize(defaultDimen))
 

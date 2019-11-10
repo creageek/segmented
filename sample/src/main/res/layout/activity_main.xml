@@ -130,10 +130,10 @@
         android:orientation="horizontal"
         app:borderWidth="0dp"
         app:segmentColor="#e9e9e2"
+        app:segmentGravity="top"
         app:segmentColorChecked="#57634b"
         app:rippleColor="#9ABCA7"
         app:rippleColorChecked="#9ABCA7"
-        app:segmentHeight="76dp"
         app:spreadType="evenly">
 
         <com.creageek.segmentedbutton.SubtitleSegment

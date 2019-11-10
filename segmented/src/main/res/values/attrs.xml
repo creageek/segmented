@@ -27,6 +27,12 @@
             <enum name="end" value="2" />
         </attr>
 
+        <attr name="segmentGravity" format="enum">
+            <enum name="top" value="0" />
+            <enum name="center" value="1" />
+            <enum name="bottom" value="2" />
+        </attr>
+
         <attr name="upperTitlePosition" format="enum">
             <enum name="start" value="0" />
             <enum name="center" value="1" />

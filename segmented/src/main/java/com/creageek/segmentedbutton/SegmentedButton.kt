@@ -60,12 +60,12 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             if (checkedIndex == indexOf) {
                 onSegmentReselected?.invoke(selected)
             } else {
-                selected.onStateChanged(true)
-//                selected.typeface = stripStyle.segmentFontChecked
+                selected.onStateChanged(SegmentState.Selected)
+//                selected.typeface = style.segmentFontChecked
                 onSegmentSelected?.invoke(selected)
                 checkedChild?.let { unselected ->
-                    unselected.onStateChanged(false)
-//                    unselected.typeface = stripStyle.segmentFont
+                    unselected.onStateChanged(SegmentState.Unselected)
+//                    unselected.typeface = style.segmentFont
                     onSegmentUnselected?.invoke(unselected)
                 }
                 checkedChild = selected
@@ -114,14 +114,14 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
             checkedIndex = it
             checkedChild = getChildAt(it) as? Segment
-            checkedChild?.onStateChanged(true)
+            checkedChild?.onStateChanged(SegmentState.Selected)
         }
     }
 
     private fun resetPreviousSegmentFontStateIfExists(selectedIndex: Int?) {
         selectedIndex?.let {
             (getChildAt(it) as? Segment)?.apply {
-                onStateChanged(false)
+                onStateChanged(SegmentState.Unselected)
             }
         }
     }

@@ -7,6 +7,9 @@ import kotlin.math.roundToInt
 
 
 data class StripStyle(
+
+    var segmentGravity: SegmentGravity = SegmentGravity.top,
+
     var spreadType: SegmentSpreadType = SegmentSpreadType.evenly,
 
     var textSize: Int = 0,
@@ -91,6 +94,13 @@ data class SubtitleSegmentStyle(
 }
 
 fun TypedArray.toStripStyle(context: Context) = StripStyle().apply {
+
+    segmentGravity =
+        SegmentGravity.values()[getInt(
+            R.styleable.SegmentedButton_segmentGravity,
+            SegmentGravity.top.value
+        )]
+
     spreadType =
         SegmentSpreadType.values()[getInt(
             R.styleable.SegmentedButton_spreadType,
