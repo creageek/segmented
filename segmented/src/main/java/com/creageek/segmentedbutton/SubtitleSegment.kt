@@ -17,7 +17,6 @@
 package com.creageek.segmentedbutton
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
@@ -26,28 +25,15 @@ import android.widget.TextView
 
 class SubtitleSegment : LinearLayout, Segment {
 
-    private var text: TextView? = null
-    private var subText: TextView? = null
-    private var upperText: TextView? = null
-
-    override fun onStateChanged(state: SegmentState) {
-        isSelected = state.value
-        if (state.value) {
-            upperText?.typeface = subtitleSegmentStyle.upperTitleFontChecked
-            text?.typeface = subtitleSegmentStyle.titleFontChecked
-            subText?.typeface = subtitleSegmentStyle.subTitleFontChecked
-        } else {
-            upperText?.typeface = subtitleSegmentStyle.upperTitleFont
-            text?.typeface = subtitleSegmentStyle.titleFont
-            subText?.typeface = subtitleSegmentStyle.subTitleFont
-        }
-    }
-
     private val subtitleSegmentStyle: SubtitleSegmentStyle
 
     private val title: String?
     private val subTitle: String?
     private val upperTitle: String?
+
+    private var text: TextView? = null
+    private var subText: TextView? = null
+    private var upperText: TextView? = null
 
     constructor(context: Context) : this(context, null)
 
@@ -75,124 +61,115 @@ class SubtitleSegment : LinearLayout, Segment {
         initWithItems()
     }
 
-    fun initWithItems() {
-        upperTitle?.let {
-            upperText = TextView(context).apply {
-                text = upperTitle
-                setTextColor(
-                    buildTextColorStateList(
-                        subtitleSegmentStyle.upperTitleTextColor,
-                        subtitleSegmentStyle.upperTitleTextColorSelected
-                    )
-                )
-                layoutParams = LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
-                )
-                gravity = subtitleSegmentStyle.upperTitlePosition.toGravity()
-
-                setTextSize(
-                    TypedValue.COMPLEX_UNIT_PX,
-                    subtitleSegmentStyle.upperTitleTextSize.toFloat()
-                )
-
-                when(subtitleSegmentStyle.upperTitleType){
-                    TextType.multiline -> {
-                        maxLines = Int.MAX_VALUE
-                        ellipsize = null
-                    }
-                    TextType.truncated -> {
-                        maxLines = 1
-                        ellipsize = TextUtils.TruncateAt.END
-                    }
-                }
-
-                typeface = subtitleSegmentStyle.upperTitleFont
-
-
-
-//                includeFontPadding = false
+    override fun onStateChanged(state: SegmentState) {
+        with(subtitleSegmentStyle) {
+            isSelected = state.value
+            if (state.value) {
+                upperText?.typeface = upperTitleFontChecked
+                text?.typeface = titleFontChecked
+                subText?.typeface = subTitleFontChecked
+            } else {
+                upperText?.typeface = upperTitleFont
+                text?.typeface = titleFont
+                subText?.typeface = subTitleFont
             }
-            addView(upperText)
-        }
-        title?.let {
-            text = TextView(context).apply {
-                text = title
-                setTextColor(
-                    buildTextColorStateList(
-                        subtitleSegmentStyle.titleTextColor,
-                        subtitleSegmentStyle.titleTextColorSelected
-                    )
-                )
-                layoutParams = LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
-                )
-                gravity = subtitleSegmentStyle.titlePosition.toGravity()
-
-                setTextSize(
-                    TypedValue.COMPLEX_UNIT_PX,
-                    subtitleSegmentStyle.textSize.toFloat()
-                )
-
-
-                when(subtitleSegmentStyle.titleType){
-                    TextType.multiline -> {
-                        maxLines = Int.MAX_VALUE
-                        ellipsize = null
-                    }
-                    TextType.truncated -> {
-                        maxLines = 1
-                        ellipsize = TextUtils.TruncateAt.END
-                    }
-                }
-
-                typeface = subtitleSegmentStyle.titleFont
-//                includeFontPadding = false
-            }
-            addView(text)
-
-        }
-        subTitle?.let {
-            subText = TextView(context).apply {
-                text = subTitle
-                setTextColor(
-                    buildTextColorStateList(
-                        subtitleSegmentStyle.subTitleTextColor,
-                        subtitleSegmentStyle.subTitleTextColorSelected
-                    )
-                )
-                layoutParams = LayoutParams(
-                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
-                )
-                gravity = subtitleSegmentStyle.subTitlePosition.toGravity()
-
-                setTextSize(
-                    TypedValue.COMPLEX_UNIT_PX,
-                    subtitleSegmentStyle.subTitleTextSize.toFloat()
-                )
-
-                when(subtitleSegmentStyle.subTitleType){
-                    TextType.multiline -> {
-                        maxLines = Int.MAX_VALUE
-                        ellipsize = null
-                    }
-                    TextType.truncated -> {
-                        maxLines = 1
-                        ellipsize = TextUtils.TruncateAt.END
-                    }
-                }
-
-                typeface = subtitleSegmentStyle.subTitleFont
-//                includeFontPadding = false
-            }
-
-            addView(subText)
         }
     }
 
-    fun buildTextColorStateList(color: Int, colorSelected: Int) = ColorStateList(
-        arrayOf(
-            subtitleSegmentStyle.stateUnselected,
-            subtitleSegmentStyle.stateSelected
-        ), intArrayOf(color, colorSelected)
-    )
+
+    private fun initWithItems() {
+        with(subtitleSegmentStyle) {
+            upperTitle?.let {
+                upperText = TextView(context).apply {
+                    text = upperTitle
+
+                    setColorStateListOf(upperTitleTextColor, upperTitleTextColorSelected)
+
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
+                    )
+                    gravity = upperTitlePosition.toGravity()
+
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, upperTitleTextSize.toFloat())
+
+                    when (upperTitleType) {
+                        TextType.multiline -> {
+                            maxLines = Int.MAX_VALUE
+                            ellipsize = null
+                        }
+                        TextType.truncated -> {
+                            maxLines = 1
+                            ellipsize = TextUtils.TruncateAt.END
+                        }
+                    }
+
+                    typeface = upperTitleFont
+                }
+
+                addView(upperText)
+            }
+
+            title?.let {
+                text = TextView(context).apply {
+                    text = title
+
+                    setColorStateListOf(titleTextColor, titleTextColorSelected)
+
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
+                    )
+                    gravity = titlePosition.toGravity()
+
+                    setTextSize(
+                        TypedValue.COMPLEX_UNIT_PX,
+                        subtitleSegmentStyle.textSize.toFloat()
+                    )
+
+                    when (titleType) {
+                        TextType.multiline -> {
+                            maxLines = Int.MAX_VALUE
+                            ellipsize = null
+                        }
+                        TextType.truncated -> {
+                            maxLines = 1
+                            ellipsize = TextUtils.TruncateAt.END
+                        }
+                    }
+
+                    typeface = titleFont
+                }
+
+                addView(text)
+            }
+
+            subTitle?.let {
+                subText = TextView(context).apply {
+                    text = subTitle
+                    setColorStateListOf(subTitleTextColor, subTitleTextColorSelected)
+
+                    layoutParams = LayoutParams(
+                        LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
+                    )
+                    gravity = subTitlePosition.toGravity()
+
+                    setTextSize(TypedValue.COMPLEX_UNIT_PX, subTitleTextSize.toFloat())
+
+                    when (subTitleType) {
+                        TextType.multiline -> {
+                            maxLines = Int.MAX_VALUE
+                            ellipsize = null
+                        }
+                        TextType.truncated -> {
+                            maxLines = 1
+                            ellipsize = TextUtils.TruncateAt.END
+                        }
+                    }
+
+                    typeface = subTitleFont
+                }
+
+                addView(subText)
+            }
+        }
+    }
 }

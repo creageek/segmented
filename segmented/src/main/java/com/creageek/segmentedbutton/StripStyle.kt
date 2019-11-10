@@ -5,7 +5,6 @@ import android.content.res.TypedArray
 import android.graphics.Typeface
 import kotlin.math.roundToInt
 
-
 data class StripStyle(
     var segmentGravity: SegmentGravity = SegmentGravity.top,
 
@@ -264,7 +263,6 @@ fun TypedArray.toSubtitleSegmentStyle(context: Context) = SubtitleSegmentStyle()
         R.styleable.SegmentedButton_textColor,
         R.color.default_text_color
     )
-
 
     subTitleTextColor = getColor(
         context,
