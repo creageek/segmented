@@ -92,6 +92,7 @@ class SubtitleSegment : LinearLayout, Segment {
 
             upperText.setTextSize(TypedValue.COMPLEX_UNIT_PX, subtitleSegmentStyle.upperTitleTextSize.toFloat())
             upperText.typeface = subtitleSegmentStyle.upperTitleFont
+            upperText.includeFontPadding = false
 
             addView(upperText)
         }
@@ -110,6 +111,7 @@ class SubtitleSegment : LinearLayout, Segment {
 
             text.setTextSize(TypedValue.COMPLEX_UNIT_PX, subtitleSegmentStyle.textSize.toFloat())
             text.typeface = subtitleSegmentStyle.titleFont
+            text.includeFontPadding = false
 
             addView(text)
 
@@ -129,7 +131,7 @@ class SubtitleSegment : LinearLayout, Segment {
 
             subText.setTextSize(TypedValue.COMPLEX_UNIT_PX, subtitleSegmentStyle.subTitleTextSize.toFloat())
             subText.typeface = subtitleSegmentStyle.subTitleFont
-
+            subText.includeFontPadding = false
             addView(subText)
         }
     }

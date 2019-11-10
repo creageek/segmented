@@ -131,6 +131,8 @@
         app:borderWidth="0dp"
         app:segmentColor="#e9e9e2"
         app:segmentColorChecked="#57634b"
+        app:rippleColor="#9ABCA7"
+        app:rippleColorChecked="#9ABCA7"
         app:segmentHeight="76dp"
         app:spreadType="evenly">
 
@@ -141,19 +143,20 @@
             android:paddingTop="6dp"
             android:paddingEnd="16dp"
             android:paddingBottom="6dp"
-            app:segmentFont="@font/metric_app_regular"
-            app:segmentFontChecked="@font/metric_app_semibold"
+            app:segmentFont="@font/montserrat_regular"
+            app:segmentFontChecked="@font/montserrat_semi_bold"
             app:subTitle="Du skal være hjemme"
             app:subTitlePosition="start"
-            app:subTitleSegmentFont="@font/metric_app_light_italic"
-            app:subTitleTextSize="13sp"
-            app:textSize="16sp"
+            app:subTitleSegmentFont="@font/montserrat_light_italic"
+            app:subTitleTextSize="12sp"
+            app:textSize="15sp"
             app:title="Personlig"
             app:titlePosition="start"
             app:upperTitle="fra 24,-"
             app:upperTitlePosition="end"
-            app:upperTitleSegmentFont="@font/metric_app_light_italic"
-            app:upperTitleTextSize="14sp" />
+            app:upperTitleSegmentFont="@font/montserrat_italic"
+            app:upperTitleSegmentFontChecked="@font/montserrat_medium_italic"
+            app:upperTitleTextSize="12sp" />
 
         <com.creageek.segmentedbutton.SubtitleSegment
             android:layout_width="wrap_content"
@@ -162,18 +165,19 @@
             android:paddingTop="8dp"
             android:paddingEnd="16dp"
             android:paddingBottom="8dp"
-            app:segmentFont="@font/metric_app_regular"
-            app:segmentFontChecked="@font/metric_app_semibold"
+            app:segmentFont="@font/montserrat_regular"
+            app:segmentFontChecked="@font/montserrat_semi_bold"
             app:subTitle="Du behøver ikke være hjemme"
             app:subTitlePosition="start"
-            app:subTitleSegmentFont="@font/metric_app_light_italic"
-            app:subTitleTextSize="13sp"
-            app:textSize="16sp"
+            app:subTitleSegmentFont="@font/montserrat_light_italic"
+            app:subTitleTextSize="12sp"
+            app:textSize="15sp"
             app:title="Fleksibel"
             app:titlePosition="start"
             app:upperTitle="fra 19,-"
             app:upperTitlePosition="end"
-            app:upperTitleSegmentFont="@font/metric_app_light_italic"
-            app:upperTitleTextSize="14sp" />
+            app:upperTitleSegmentFont="@font/montserrat_italic"
+            app:upperTitleSegmentFontChecked="@font/montserrat_medium_italic"
+            app:upperTitleTextSize="12sp" />
     </com.creageek.segmentedbutton.SegmentedButton>
 </LinearLayout>
