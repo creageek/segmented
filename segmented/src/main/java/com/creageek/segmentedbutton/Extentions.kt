@@ -17,9 +17,11 @@
 package com.creageek.segmentedbutton
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.graphics.Typeface
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 
@@ -48,3 +50,12 @@ fun TypedArray.getFont(
     }
 }
 
+fun TextView.setColorStateListOf(color: Int, colorSelected: Int) {
+    val list = ColorStateList(
+        arrayOf(
+            intArrayOf(-android.R.attr.state_selected),
+            intArrayOf(android.R.attr.state_selected)
+        ), intArrayOf(color, colorSelected)
+    )
+    setTextColor(list)
+}

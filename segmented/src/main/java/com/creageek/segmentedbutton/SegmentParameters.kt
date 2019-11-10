@@ -26,12 +26,17 @@ enum class SegmentSpreadType(val value: Int) {
     evenly(0), wrap(1)
 }
 
-enum class TextPosition(val value: Int) {
-    start(0), center(1), end(2)
-}
-
 enum class SegmentGravity(val value: Int) {
     top(0), center(1), bottom(2)
+}
+
+
+enum class SegmentState(val value: Boolean) {
+    selected(true), unselected(false)
+}
+
+enum class TextPosition(val value: Int) {
+    start(0), center(1), end(2)
 }
 
 enum class TextType(val value: Int) {
@@ -39,25 +44,13 @@ enum class TextType(val value: Int) {
 }
 
 fun TextPosition.toGravity() = when (this) {
-    TextPosition.start -> {
-        Gravity.START
-    }
-    TextPosition.center -> {
-        Gravity.CENTER_HORIZONTAL
-    }
-    TextPosition.end -> {
-        Gravity.END
-    }
+    TextPosition.start -> Gravity.START
+    TextPosition.center -> Gravity.CENTER_HORIZONTAL
+    TextPosition.end -> Gravity.END
 }
 
 fun SegmentGravity.toGravity() = when (this) {
-    SegmentGravity.top -> {
-        Gravity.TOP
-    }
-    SegmentGravity.center -> {
-        Gravity.CENTER_VERTICAL
-    }
-    SegmentGravity.bottom -> {
-        Gravity.BOTTOM
-    }
+    SegmentGravity.top -> Gravity.TOP
+    SegmentGravity.center -> Gravity.CENTER_VERTICAL
+    SegmentGravity.bottom -> Gravity.BOTTOM
 }

@@ -17,21 +17,11 @@
 package com.creageek.segmentedbutton
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.RadioButton
 
 class TextSegment : RadioButton, Segment {
-
-    override fun onStateChanged(state: SegmentState) {
-        isSelected = state.value
-        typeface = if (state.value) {
-            segmentStyle.segmentFontChecked
-        } else {
-            segmentStyle.segmentFont
-        }
-    }
 
     private val segmentStyle: SegmentStyle
 
@@ -43,7 +33,6 @@ class TextSegment : RadioButton, Segment {
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-
         segmentStyle = context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.SegmentedButton,
@@ -53,29 +42,28 @@ class TextSegment : RadioButton, Segment {
         initSegment()
     }
 
-    fun initSegment() {
-        this.setTextSize(TypedValue.COMPLEX_UNIT_PX, segmentStyle.textSize.toFloat())
-        this.typeface = segmentStyle.segmentFont
-
-
-        val textState =
-            buildTextColorStateList(segmentStyle.textColor, segmentStyle.textColorSelected)
-
-        setTextColor(textState)
+    override fun onStateChanged(state: SegmentState) {
+        isSelected = state.value
+        typeface = if (state.value) {
+            segmentStyle.segmentFontChecked
+        } else {
+            segmentStyle.segmentFont
+        }
     }
 
-    fun buildTextColorStateList(color: Int, colorSelected: Int) = ColorStateList(
-        arrayOf(
-            segmentStyle.stateUnselected,
-            segmentStyle.stateSelected
-        ), intArrayOf(color, colorSelected)
-    )
+    private fun initSegment() {
+        setTextSize(TypedValue.COMPLEX_UNIT_PX, segmentStyle.textSize.toFloat())
+        typeface = segmentStyle.segmentFont
+        setColorStateListOf(segmentStyle.textColor, segmentStyle.textColorSelected)
+    }
 
-    fun attachStripStyle(style: StripStyle) {
-        segmentStyle.textSize = style.textSize
-        segmentStyle.textColor = style.textColor
-        segmentStyle.textColorSelected = style.textColorSelected
-        segmentStyle.segmentFont = style.segmentFont
-        segmentStyle.segmentFontChecked = style.segmentFontChecked
+    private fun attachStripStyle(style: StripStyle) {
+        segmentStyle.apply {
+            textSize = style.textSize
+            textColor = style.textColor
+            textColorSelected = style.textColorSelected
+            segmentFont = style.segmentFont
+            segmentFontChecked = style.segmentFontChecked
+        }
     }
 }

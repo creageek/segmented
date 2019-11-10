@@ -23,11 +23,13 @@ import android.widget.RadioGroup
 
 class SegmentedButton : RadioGroup, View.OnClickListener {
 
-    private lateinit var stripStyle: StripStyle
-
-    private val customizer by lazy { SegmentCustomizer(stripStyle) }
+    var initialCheckedIndex: Int? = null
 
     // inner values
+    private val customizer by lazy { SegmentCustomizer(stripStyle) }
+
+    private val stripStyle: StripStyle
+
     private var checkedIndex: Int? = null
     private var checkedChild: Segment? = null
 
@@ -35,12 +37,9 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private var onSegmentReselected: ((segment: Segment) -> Unit)? = null
     private var onSegmentUnselected: ((segment: Segment) -> Unit)? = null
 
-    var initialCheckedIndex: Int? = null
-
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-
         stripStyle = context.theme.obtainStyledAttributes(
             attrs,
             R.styleable.SegmentedButton,
@@ -60,12 +59,10 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             if (checkedIndex == indexOf) {
                 onSegmentReselected?.invoke(selected)
             } else {
-                selected.onStateChanged(SegmentState.Selected)
-//                selected.typeface = style.segmentFontChecked
+                selected.onStateChanged(SegmentState.selected)
                 onSegmentSelected?.invoke(selected)
                 checkedChild?.let { unselected ->
-                    unselected.onStateChanged(SegmentState.Unselected)
-//                    unselected.typeface = style.segmentFont
+                    unselected.onStateChanged(SegmentState.unselected)
                     onSegmentUnselected?.invoke(unselected)
                 }
                 checkedChild = selected
@@ -99,8 +96,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         spreadType: SegmentSpreadType,
         includeRipple: Boolean
     ): View? = when (this) {
-        is TextSegment -> customizer.initSegment(this, type, spreadType, includeRipple)
-        is SubtitleSegment -> customizer.initSubtitleSegment(this, type, spreadType, includeRipple)
+        is TextSegment -> customizer.onTextSegment(this, type, spreadType, includeRipple)
+        is SubtitleSegment -> customizer.onSubtitleSegment(this, type, spreadType, includeRipple)
         else -> null
     }
 
@@ -114,14 +111,14 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
             checkedIndex = it
             checkedChild = getChildAt(it) as? Segment
-            checkedChild?.onStateChanged(SegmentState.Selected)
+            checkedChild?.onStateChanged(SegmentState.selected)
         }
     }
 
     private fun resetPreviousSegmentFontStateIfExists(selectedIndex: Int?) {
         selectedIndex?.let {
             (getChildAt(it) as? Segment)?.apply {
-                onStateChanged(SegmentState.Unselected)
+                onStateChanged(SegmentState.unselected)
             }
         }
     }

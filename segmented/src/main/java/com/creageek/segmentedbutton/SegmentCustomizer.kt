@@ -6,81 +6,79 @@ import android.graphics.drawable.*
 import android.graphics.drawable.shapes.RoundRectShape
 import android.view.Gravity
 import android.widget.LinearLayout
-import android.widget.RadioButton
 import android.widget.RadioGroup
 
-class SegmentCustomizer(val style: StripStyle) {
+class SegmentCustomizer(private val style: StripStyle) {
 
-    fun initSegment(
+    fun onTextSegment(
         view: TextSegment,
         type: SegmentType,
         spreadType: SegmentSpreadType,
         includeRipple: Boolean
-    ): RadioButton {
-        with(view) {
+    ) = view.apply {
+        with(style) {
 
             val state = buildSegmentStateDrawable(
                 type,
-                style.segmentColor,
-                style.segmentColorSelected,
-                style.borderColor
+                segmentColor,
+                segmentColorSelected,
+                borderColor
             )
 
             val rippleState = wrapSegmentStateDrawableWithRipple(
                 state,
-                style.rippleColor,
-                style.rippleColorSelected
+                rippleColor,
+                rippleColorSelected
             )
 
             background = if (includeRipple) rippleState else state
             buttonDrawable = null
+
             gravity = Gravity.CENTER
-            minimumHeight = style.segmentHeight
+            minimumHeight = segmentHeight
+
             layoutParams = RadioGroup.LayoutParams(
                 when (spreadType) {
                     SegmentSpreadType.evenly -> RadioGroup.LayoutParams.MATCH_PARENT
                     SegmentSpreadType.wrap -> RadioGroup.LayoutParams.WRAP_CONTENT
                 }, RadioGroup.LayoutParams.MATCH_PARENT, 1f
             )
-
-            return this
         }
     }
 
 
-    fun initSubtitleSegment(
+    fun onSubtitleSegment(
         view: SubtitleSegment,
         type: SegmentType,
         spreadType: SegmentSpreadType,
         includeRipple: Boolean
-    ): SubtitleSegment {
-        with(view) {
+    ) = view.apply {
+        with(style) {
+
             val state = buildSegmentStateDrawable(
                 type,
-                style.segmentColor,
-                style.segmentColorSelected,
-                style.borderColor
+                segmentColor,
+                segmentColorSelected,
+                borderColor
             )
 
             val rippleState = wrapSegmentStateDrawableWithRipple(
                 state,
-                style.rippleColor,
-                style.rippleColorSelected
+                rippleColor,
+                rippleColorSelected
             )
 
-
-
             background = if (includeRipple) rippleState else state
-            gravity = style.segmentGravity.toGravity()
-            minimumHeight = style.segmentHeight
+
+            gravity = segmentGravity.toGravity()
+            minimumHeight = segmentHeight
+
             layoutParams = RadioGroup.LayoutParams(
                 when (spreadType) {
                     SegmentSpreadType.evenly -> RadioGroup.LayoutParams.MATCH_PARENT
                     SegmentSpreadType.wrap -> RadioGroup.LayoutParams.WRAP_CONTENT
                 }, RadioGroup.LayoutParams.MATCH_PARENT, 1f
             ).apply { orientation = LinearLayout.VERTICAL }
-
-            return this
         }
     }
 
@@ -149,36 +147,37 @@ class SegmentCustomizer(val style: StripStyle) {
                 buildSegmentShape(type, segmentColor)
             )
         ).apply {
-            when (type) {
-                SegmentType.first -> setLayerInset(
-                    1,
-                    style.borderWidth,
-                    style.borderWidth,
-                    style.borderInnerWidth,
-                    style.borderWidth
-                )
-                SegmentType.center -> setLayerInset(
-                    1,
-                    style.borderInnerWidth,
-                    style.borderWidth,
-                    style.borderInnerWidth,
-                    style.borderWidth
-                )
-                SegmentType.last -> setLayerInset(
-                    1,
-                    style.borderInnerWidth,
-                    style.borderWidth,
-                    style.borderWidth,
-                    style.borderWidth
-                )
-                SegmentType.only -> setLayerInset(
-                    1,
-                    style.borderWidth,
-                    style.borderWidth,
-                    style.borderWidth,
-                    style.borderWidth
-                )
-
+            with(style) {
+                when (type) {
+                    SegmentType.first -> setLayerInset(
+                        1,
+                        borderWidth,
+                        borderWidth,
+                        borderInnerWidth,
+                        borderWidth
+                    )
+                    SegmentType.center -> setLayerInset(
+                        1,
+                        borderInnerWidth,
+                        borderWidth,
+                        borderInnerWidth,
+                        borderWidth
+                    )
+                    SegmentType.last -> setLayerInset(
+                        1,
+                        borderInnerWidth,
+                        borderWidth,
+                        borderWidth,
+                        borderWidth
+                    )
+                    SegmentType.only -> setLayerInset(
+                        1,
+                        borderWidth,
+                        borderWidth,
+                        borderWidth,
+                        borderWidth
+                    )
+                }
             }
         }
 }

@@ -7,7 +7,6 @@ import kotlin.math.roundToInt
 
 
 data class StripStyle(
-
     var segmentGravity: SegmentGravity = SegmentGravity.top,
 
     var spreadType: SegmentSpreadType = SegmentSpreadType.evenly,
@@ -33,9 +32,7 @@ data class StripStyle(
     var rippleColorSelected: Int = 0
 ) {
     // inner values
-    val stateChecked = intArrayOf(android.R.attr.state_checked)
     val stateSelected = intArrayOf(android.R.attr.state_selected)
-    val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
     val stateUnselected = intArrayOf(-android.R.attr.state_selected)
 
     val r0 = 0.1f.toPx()
@@ -43,23 +40,15 @@ data class StripStyle(
 
 data class SegmentStyle(
     var textSize: Int = 0,
+
     var textColor: Int = 0,
     var textColorSelected: Int = 0,
+
     var segmentFont: Typeface? = null,
     var segmentFontChecked: Typeface? = null
-) {
-    // inner values
-    val stateChecked = intArrayOf(android.R.attr.state_checked)
-    val stateSelected = intArrayOf(android.R.attr.state_selected)
-    val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
-    val stateUnselected = intArrayOf(-android.R.attr.state_selected)
-
-    val r0 = 0.1f.toPx()
-
-}
+)
 
 data class SubtitleSegmentStyle(
-
     var titleType: TextType = TextType.multiline,
     var subTitleType: TextType = TextType.multiline,
     var upperTitleType: TextType = TextType.multiline,
@@ -89,12 +78,8 @@ data class SubtitleSegmentStyle(
     var upperTitleFontChecked: Typeface? = null
 ) {
     // inner values
-    val stateChecked = intArrayOf(android.R.attr.state_checked)
     val stateSelected = intArrayOf(android.R.attr.state_selected)
-    val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
     val stateUnselected = intArrayOf(-android.R.attr.state_selected)
-
-    val r0 = 0.1f.toPx()
 }
 
 fun TypedArray.toStripStyle(context: Context) = StripStyle().apply {
@@ -111,101 +96,79 @@ fun TypedArray.toStripStyle(context: Context) = StripStyle().apply {
             SegmentSpreadType.wrap.value
         )]
 
-    textSize = getDimensionPixelSize(
+    textSize = getDimensInPixel(
+        context,
         R.styleable.SegmentedButton_textSize,
-        context.resources.getDimensionPixelSize(R.dimen.default_segment_text_size)
+        R.dimen.default_segment_text_size
     )
 
-    segmentHeight = getDimensionPixelSize(
+    segmentHeight = getDimensInPixel(
+        context,
         R.styleable.SegmentedButton_segmentHeight,
-        context.resources.getDimensionPixelSize(R.dimen.default_segment_height)
+        R.dimen.default_segment_height
     )
 
     textColor = getColor(
+        context,
         R.styleable.SegmentedButton_textColor,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_text_color
-        )
+        R.color.default_text_color
     )
 
     textColorSelected = getColor(
+        context,
         R.styleable.SegmentedButton_textColorChecked,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_text_color_checked
-        )
+        R.color.default_text_color_checked
     )
 
     segmentColor = getColor(
+        context,
         R.styleable.SegmentedButton_segmentColor,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_segment_color
-        )
+        R.color.default_segment_color
     )
 
     segmentColorSelected = getColor(
+        context,
         R.styleable.SegmentedButton_segmentColorChecked,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_segment_color_checked
-        )
+        R.color.default_segment_color_checked
     )
 
     borderColor = getColor(
+        context,
         R.styleable.SegmentedButton_borderColor,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_border_color
-        )
+        R.color.default_border_color
     )
 
-    borderWidth = getDimensionPixelSize(
+    borderWidth = getDimensInPixel(
+        context,
         R.styleable.SegmentedButton_borderWidth,
-        context.resources.getDimensionPixelSize(R.dimen.default_border_width)
+        R.dimen.default_border_width
     )
 
-    r = getDimensionPixelSize(
+    r = getDimensInPixel(
+        context,
         R.styleable.SegmentedButton_cornerRadius,
-        context.resources.getDimensionPixelSize(R.dimen.default_corner_radius)
+        R.dimen.default_corner_radius
     ).toFloat()
 
     rippleColor = getColor(
+        context,
         R.styleable.SegmentedButton_rippleColor,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_ripple_color
-        )
+        R.color.default_ripple_color
     )
 
     rippleColorSelected = getColor(
+        context,
         R.styleable.SegmentedButton_rippleColorChecked,
-        androidx.core.content.ContextCompat.getColor(
-            context,
-            R.color.default_ripple_color_checked
-        )
+        R.color.default_ripple_color_checked
     )
 
     borderInnerWidth = (borderWidth / 2f).roundToInt()
     rI = r - borderInnerWidth
 
-    val segmentFontId =
-        getResourceId(R.styleable.SegmentedButton_segmentFont, -1)
-    if (segmentFontId != -1) {
-        segmentFont = androidx.core.content.res.ResourcesCompat.getFont(context, segmentFontId)
-    }
+    segmentFont = getFont(context, R.styleable.SegmentedButton_segmentFont)
 
-    val segmentFontCheckedId = getResourceId(
-        R.styleable.SegmentedButton_segmentFontChecked,
-        -1
-    )
-    if (segmentFontCheckedId != -1) {
-        segmentFontChecked =
-            androidx.core.content.res.ResourcesCompat.getFont(context, segmentFontCheckedId)
-    } else if (segmentFontId != -1) {
-        segmentFontChecked = segmentFont
-    }
+    segmentFontChecked =
+        getFont(context, R.styleable.SegmentedButton_segmentFontChecked, segmentFont)
 
     recycle()
 }
