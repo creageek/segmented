@@ -20,27 +20,25 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.RadioGroup
 import android.widget.TextView
 
 class SubtitleSegment : LinearLayout, Segment {
 
-    private lateinit var text:TextView
-    private lateinit var subText:TextView
-    private lateinit var upperText:TextView
+    private var text: TextView? = null
+    private var subText: TextView? = null
+    private var upperText: TextView? = null
 
-    override fun onStateChanged(isChecked:Boolean){
+    override fun onStateChanged(isChecked: Boolean) {
         isSelected = isChecked
-        if(isChecked){
-            upperText.typeface = subtitleSegmentStyle.upperTitleFontChecked
-            text.typeface = subtitleSegmentStyle.titleFontChecked
-            subText.typeface = subtitleSegmentStyle.subTitleFontChecked
-        }else{
-            upperText.typeface = subtitleSegmentStyle.upperTitleFont
-            text.typeface = subtitleSegmentStyle.titleFont
-            subText.typeface = subtitleSegmentStyle.subTitleFont
+        if (isChecked) {
+            upperText?.typeface = subtitleSegmentStyle.upperTitleFontChecked
+            text?.typeface = subtitleSegmentStyle.titleFontChecked
+            subText?.typeface = subtitleSegmentStyle.subTitleFontChecked
+        } else {
+            upperText?.typeface = subtitleSegmentStyle.upperTitleFont
+            text?.typeface = subtitleSegmentStyle.titleFont
+            subText?.typeface = subtitleSegmentStyle.subTitleFont
         }
     }
 
@@ -78,60 +76,74 @@ class SubtitleSegment : LinearLayout, Segment {
 
     fun initWithItems() {
         upperTitle?.let {
-            upperText = TextView(context)
-            upperText.text = upperTitle
-            upperText.setTextColor(
-                buildTextColorStateList(
-                    subtitleSegmentStyle.upperTitleTextColor,
-                    subtitleSegmentStyle.upperTitleTextColorSelected
+            upperText = TextView(context).apply {
+                text = upperTitle
+                setTextColor(
+                    buildTextColorStateList(
+                        subtitleSegmentStyle.upperTitleTextColor,
+                        subtitleSegmentStyle.upperTitleTextColorSelected
+                    )
                 )
-            )
-            upperText.layoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            upperText.gravity =subtitleSegmentStyle.upperTitlePosition.toGravity()
+                layoutParams = LayoutParams(
+                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
+                )
+                gravity = subtitleSegmentStyle.upperTitlePosition.toGravity()
 
-            upperText.setTextSize(TypedValue.COMPLEX_UNIT_PX, subtitleSegmentStyle.upperTitleTextSize.toFloat())
-            upperText.typeface = subtitleSegmentStyle.upperTitleFont
-            upperText.includeFontPadding = false
-
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    subtitleSegmentStyle.upperTitleTextSize.toFloat()
+                )
+                typeface = subtitleSegmentStyle.upperTitleFont
+                includeFontPadding = false
+            }
             addView(upperText)
         }
         title?.let {
-            text = TextView(context)
-            text.text = title
-            text.setTextColor(
-                buildTextColorStateList(
-                    subtitleSegmentStyle.titleTextColor,
-                    subtitleSegmentStyle.titleTextColorSelected
+            text = TextView(context).apply {
+                text = title
+                setTextColor(
+                    buildTextColorStateList(
+                        subtitleSegmentStyle.titleTextColor,
+                        subtitleSegmentStyle.titleTextColorSelected
+                    )
                 )
-            )
-            text.layoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            text.gravity =subtitleSegmentStyle.titlePosition.toGravity()
+                layoutParams = LayoutParams(
+                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
+                )
+                gravity = subtitleSegmentStyle.titlePosition.toGravity()
 
-            text.setTextSize(TypedValue.COMPLEX_UNIT_PX, subtitleSegmentStyle.textSize.toFloat())
-            text.typeface = subtitleSegmentStyle.titleFont
-            text.includeFontPadding = false
-
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    subtitleSegmentStyle.textSize.toFloat()
+                )
+                typeface = subtitleSegmentStyle.titleFont
+                includeFontPadding = false
+            }
             addView(text)
 
         }
         subTitle?.let {
-            subText = TextView(context)
-            subText.text = subTitle
-            subText.setTextColor(
-                buildTextColorStateList(
-                    subtitleSegmentStyle.subTitleTextColor,
-                    subtitleSegmentStyle.subTitleTextColorSelected
+            subText = TextView(context).apply {
+                text = subTitle
+                setTextColor(
+                    buildTextColorStateList(
+                        subtitleSegmentStyle.subTitleTextColor,
+                        subtitleSegmentStyle.subTitleTextColorSelected
+                    )
                 )
-            )
-            subText.layoutParams = LayoutParams(
-                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
-            subText.gravity =subtitleSegmentStyle.subTitlePosition.toGravity()
+                layoutParams = LayoutParams(
+                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT
+                )
+                gravity = subtitleSegmentStyle.subTitlePosition.toGravity()
 
-            subText.setTextSize(TypedValue.COMPLEX_UNIT_PX, subtitleSegmentStyle.subTitleTextSize.toFloat())
-            subText.typeface = subtitleSegmentStyle.subTitleFont
-            subText.includeFontPadding = false
+                setTextSize(
+                    TypedValue.COMPLEX_UNIT_PX,
+                    subtitleSegmentStyle.subTitleTextSize.toFloat()
+                )
+                typeface = subtitleSegmentStyle.subTitleFont
+                includeFontPadding = false
+            }
+
             addView(subText)
         }
     }
