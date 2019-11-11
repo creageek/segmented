@@ -106,13 +106,17 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private fun setInitialCheckedItem() {
         initialCheckedIndex?.let {
 
-            // reset previously checked segment font to unchecked state
-            resetPreviousSegmentFontStateIfExists(checkedIndex)
-
-            checkedIndex = it
-            checkedChild = getChildAt(it) as? Segment
-            checkedChild?.onStateChanged(SegmentState.selected)
+            forceCheckItemAt(it)
         }
+    }
+
+    fun forceCheckItemAt(index: Int) {
+        // reset previously checked segment font to unchecked state
+        resetPreviousSegmentFontStateIfExists(checkedIndex)
+
+        checkedIndex = index
+        checkedChild = getChildAt(index) as? Segment
+        checkedChild?.onStateChanged(SegmentState.selected)
     }
 
     private fun resetPreviousSegmentFontStateIfExists(selectedIndex: Int?) {

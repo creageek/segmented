@@ -35,21 +35,8 @@ class SubtitleSegment : LinearLayout, Segment {
     private var subText: TextView? = null
     private var upperText: TextView? = null
 
-    private val paddingSmall by lazy {
-        //        TypedValue.applyDimension(
-//            TypedValue.COMPLEX_UNIT_DIP,
-        2.0f
-//            resources.displayMetrics
-//        )
-    }
-
-    private val paddingLarge by lazy {
-        //        TypedValue.applyDimension(
-//            TypedValue.COMPLEX_UNIT_DIP,
-        4.0f
-//            resources.displayMetrics
-//        )
-    }
+    private val paddingSmall = 2.0f
+    private val paddingLarge = 4.0f
 
     constructor(context: Context) : this(context, null)
 
@@ -131,7 +118,6 @@ class SubtitleSegment : LinearLayout, Segment {
                     )
 
                     setPadding(paddingStart, paddingTop, paddingRight, paddingSmall.toInt())
-//                    setLineSpacing(0f,0f)
                 }
 
 
@@ -175,14 +161,12 @@ class SubtitleSegment : LinearLayout, Segment {
                         ), 1.0f
                     )
 
-//                    setLineSpacing(0f,0f)
                     setPadding(
                         paddingStart,
                         paddingLarge.toInt(),
                         paddingRight,
                         paddingLarge.toInt()
                     )
-
                 }
 
                 addView(text)
@@ -221,9 +205,7 @@ class SubtitleSegment : LinearLayout, Segment {
                         ), 1.0f
                     )
 
-//                    setLineSpacing(0f,0f)
                     setPadding(paddingStart, paddingLarge.toInt(), paddingRight, paddingBottom)
-
                 }
 
                 addView(subText)
