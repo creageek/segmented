@@ -18,8 +18,12 @@ package com.creageek.segmentedbutton
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
+import com.creageek.segmentedbutton.style.InternalStripStyle
+import com.creageek.segmentedbutton.style.StripStyle
+import com.creageek.segmentedbutton.style.toStripStyle
 
 class SegmentedButton : RadioGroup, View.OnClickListener {
 
@@ -153,5 +157,14 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             addView(segment)
         }
         onFinishInflate()
+    }
+
+    fun customize(block: InternalStripStyle.() -> Unit) {
+        // removing all views in order to prevent duplications which was mentioned by some of the developers
+        val st = stripStyle.toInternalStyle()
+        block(st)
+        stripStyle.borderWidth = st.borderWidth
+        Log.d("customize ts", "${st.textSize}")
+        styleChildSegments(true)
     }
 }

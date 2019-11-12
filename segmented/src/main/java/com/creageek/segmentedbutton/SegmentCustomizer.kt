@@ -7,6 +7,7 @@ import android.graphics.drawable.shapes.RoundRectShape
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.RadioGroup
+import com.creageek.segmentedbutton.style.StripStyle
 
 class SegmentCustomizer(private val style: StripStyle) {
 

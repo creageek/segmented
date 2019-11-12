@@ -22,6 +22,10 @@ class MainActivity : AppCompatActivity() {
                 listOf("Today", "This week", "This month")
             }
 
+            customize {
+                borderWidth = 50
+            }
+
             // notifies when segment was checked
             onSegmentChecked { segment ->
                 Log.d("creageek:segmented", "TextSegment ${segment} checked")
@@ -59,5 +63,7 @@ class MainActivity : AppCompatActivity() {
         subtitled {
             initialCheckedIndex = 0
         }
+
+        subtitled.forceCheckItemAt(1)
     }
 }

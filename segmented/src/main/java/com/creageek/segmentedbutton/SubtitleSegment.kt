@@ -22,6 +22,8 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.creageek.segmentedbutton.style.SubtitleSegmentStyle
+import com.creageek.segmentedbutton.style.toSubtitleSegmentStyle
 
 class SubtitleSegment : LinearLayout, Segment {
 
