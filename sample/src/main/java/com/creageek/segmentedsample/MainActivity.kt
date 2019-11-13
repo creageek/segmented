@@ -3,6 +3,8 @@ package com.creageek.segmentedsample
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.creageek.segmentedbutton.SubtitleSegment
+import com.creageek.segmentedbutton.TextSegment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +19,21 @@ class MainActivity : AppCompatActivity() {
             initialCheckedIndex = 0
 
             // init with segments programmatically without RadioButton as a child in xml
-            initWithItems {
-                // takes only list of strings
-                listOf("Today", "This week", "This month")
+//            initWithItems {
+//                // takes only list of strings
+//                listOf("Today", "This week", "This month")
+//            }
+
+            addSegments {
+                listOf(
+                    TextSegment(context, "Segment 1"),
+                    SubtitleSegment(context, "Segment 2", "Sub 2", "Upper 2"),
+                    TextSegment(context, "Segment 3")
+                )
+            }
+
+            customizeSubtitleSegment {
+                textSize = 90
             }
 
             // notifies when segment was checked

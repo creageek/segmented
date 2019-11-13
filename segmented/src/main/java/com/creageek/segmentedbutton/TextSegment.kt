@@ -43,6 +43,10 @@ class TextSegment : RadioButton, Segment {
         initSegment()
     }
 
+    constructor(context: Context, text: String) : this(context, null) {
+        this.text = text
+    }
+
     constructor(context: Context, style: StripStyle) : this(context, null) {
         attachStripStyle(style)
         initSegment()
@@ -74,7 +78,7 @@ class TextSegment : RadioButton, Segment {
         setColorStateListOf(segmentStyle.textColor, segmentStyle.textColorSelected)
     }
 
-    private fun attachStripStyle(style: StripStyle) {
+    fun attachStripStyle(style: StripStyle) {
         segmentStyle.apply {
             textSize = style.textSize
             textColor = style.textColor

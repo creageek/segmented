@@ -62,9 +62,9 @@ class SubtitleSegment : LinearLayout, Segment {
         initWithItems()
     }
 
-    private val title: String?
-    private val subTitle: String?
-    private val upperTitle: String?
+    private var title: String?
+    private var subTitle: String?
+    private var upperTitle: String?
 
     private var text: TextView? = null
     private var subText: TextView? = null
@@ -72,6 +72,15 @@ class SubtitleSegment : LinearLayout, Segment {
 
     private val paddingSmall = 2.0f
     private val paddingLarge = 4.0f
+
+    constructor(context: Context, title: String, subTitle: String?, upperTitle: String?) : this(
+        context,
+        null
+    ) {
+        this.title = title
+        this.subTitle = subTitle
+        this.upperTitle = upperTitle
+    }
 
     constructor(context: Context) : this(context, null)
 

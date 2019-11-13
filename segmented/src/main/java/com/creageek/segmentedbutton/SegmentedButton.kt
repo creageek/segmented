@@ -171,6 +171,23 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         onFinishInflate()
     }
 
+    fun addSegments(block: SegmentedButton.() -> List<Segment>) {
+        // removing all views in order to prevent duplications which was mentioned by some of the developers
+        removeAllViews()
+
+        block().forEach {
+            when (it) {
+                is TextSegment -> {
+                    it.attachStripStyle(stripStyle)
+                    addView(it)
+                }
+                is SubtitleSegment -> addView(it)
+            }
+        }
+
+        onFinishInflate()
+    }
+
     fun customizeStrip(block: InternalStripStyle.() -> Unit) {
         // removing all views in order to prevent duplications which was mentioned by some of the developers
         val st = stripStyle.toInternalStyle()
