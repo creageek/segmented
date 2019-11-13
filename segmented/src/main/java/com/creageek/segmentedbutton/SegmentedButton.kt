@@ -18,12 +18,9 @@ package com.creageek.segmentedbutton
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
 import android.view.View
 import android.widget.RadioGroup
-import com.creageek.segmentedbutton.style.InternalStripStyle
-import com.creageek.segmentedbutton.style.StripStyle
-import com.creageek.segmentedbutton.style.toStripStyle
+import com.creageek.segmentedbutton.style.*
 
 class SegmentedButton : RadioGroup, View.OnClickListener {
 
@@ -33,6 +30,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private val customizer by lazy { SegmentCustomizer(stripStyle) }
 
     private val stripStyle: StripStyle
+    private var textSegmentStyle: InternalTextSegmentStyle = InternalTextSegmentStyle()
+    private var subtitleSegmentStyle: InternalSubtitleSegmentStyle = InternalSubtitleSegmentStyle()
 
     private var checkedIndex: Int? = null
     private var checkedChild: Segment? = null
@@ -100,8 +99,20 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         spreadType: SegmentSpreadType,
         includeRipple: Boolean
     ): View? = when (this) {
-        is TextSegment -> customizer.onTextSegment(this, type, spreadType, includeRipple)
-        is SubtitleSegment -> customizer.onSubtitleSegment(this, type, spreadType, includeRipple)
+        is TextSegment -> customizer.onTextSegment(
+            this,
+            textSegmentStyle,
+            type,
+            spreadType,
+            includeRipple
+        )
+        is SubtitleSegment -> customizer.onSubtitleSegment(
+            this,
+            subtitleSegmentStyle,
+            type,
+            spreadType,
+            includeRipple
+        )
         else -> null
     }
 
@@ -133,6 +144,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
     operator fun invoke(block: SegmentedButton.() -> Unit) = run {
         block()
+        styleChildSegments(true)
         setInitialCheckedItem()
     }
 
@@ -159,12 +171,34 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         onFinishInflate()
     }
 
-    fun customize(block: InternalStripStyle.() -> Unit) {
+    fun customizeStrip(block: InternalStripStyle.() -> Unit) {
         // removing all views in order to prevent duplications which was mentioned by some of the developers
         val st = stripStyle.toInternalStyle()
         block(st)
-        stripStyle.borderWidth = st.borderWidth
-        Log.d("customize ts", "${st.textSize}")
-        styleChildSegments(true)
+        st.segmentGravity?.let { stripStyle.segmentGravity = it }
+        st.spreadType?.let { stripStyle.spreadType = it }
+        st.textSize?.let { stripStyle.textSize = it }
+        st.segmentHeight?.let { stripStyle.segmentHeight = it }
+        st.textColor?.let { stripStyle.textColor = it }
+        st.textColorSelected?.let { stripStyle.textColorSelected = it }
+        st.segmentFont?.let { stripStyle.segmentFont = it }
+        st.segmentFontChecked?.let { stripStyle.segmentFontChecked = it }
+        st.borderColor?.let { stripStyle.borderColor = it }
+        st.borderWidth?.let { stripStyle.borderWidth = it }
+        st.r?.let { stripStyle.r = it }
+        st.segmentColor?.let { stripStyle.segmentColor = it }
+        st.segmentColorSelected?.let { stripStyle.segmentColorSelected = it }
+        st.rippleColor?.let { stripStyle.rippleColor = it }
+        st.rippleColorSelected?.let { stripStyle.rippleColorSelected = it }
+    }
+
+    fun customizeTextSegment(block: InternalTextSegmentStyle.() -> Unit) {
+        // removing all views in order to prevent duplications which was mentioned by some of the developers
+        block(textSegmentStyle)
+    }
+
+    fun customizeSubtitleSegment(block: InternalSubtitleSegmentStyle.() -> Unit) {
+        // removing all views in order to prevent duplications which was mentioned by some of the developers
+        block(subtitleSegmentStyle)
     }
 }

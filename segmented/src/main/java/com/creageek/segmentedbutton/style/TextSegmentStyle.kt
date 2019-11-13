@@ -8,6 +8,17 @@ import com.creageek.segmentedbutton.getColor
 import com.creageek.segmentedbutton.getDimensInPixel
 import com.creageek.segmentedbutton.getFont
 
+data class InternalTextSegmentStyle(
+    var textSize: Int? = null,
+
+    var textColor: Int? = null,
+    var textColorSelected: Int? = null,
+
+    var segmentFont: Typeface? = null,
+    var segmentFontChecked: Typeface? = null
+)
+
+
 data class TextSegmentStyle(
     var textSize: Int = 0,
 
@@ -16,7 +27,15 @@ data class TextSegmentStyle(
 
     var segmentFont: Typeface? = null,
     var segmentFontChecked: Typeface? = null
-)
+) {
+    fun toInternalTextSegmentStyle() = InternalTextSegmentStyle(
+        textSize,
+        textColor,
+        textColorSelected,
+        segmentFont,
+        segmentFontChecked
+    )
+}
 
 fun TypedArray.toTextSegmentStyle(context: Context) = TextSegmentStyle().apply {
 

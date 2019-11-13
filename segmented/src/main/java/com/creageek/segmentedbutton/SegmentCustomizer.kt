@@ -7,16 +7,22 @@ import android.graphics.drawable.shapes.RoundRectShape
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.RadioGroup
+import com.creageek.segmentedbutton.style.InternalSubtitleSegmentStyle
+import com.creageek.segmentedbutton.style.InternalTextSegmentStyle
 import com.creageek.segmentedbutton.style.StripStyle
 
 class SegmentCustomizer(private val style: StripStyle) {
 
     fun onTextSegment(
         view: TextSegment,
+        textStyle: InternalTextSegmentStyle,
         type: SegmentType,
         spreadType: SegmentSpreadType,
         includeRipple: Boolean
     ) = view.apply {
+
+        updateStyles(textStyle)
+
         with(style) {
 
             val state = buildSegmentStateDrawable(
@@ -50,10 +56,14 @@ class SegmentCustomizer(private val style: StripStyle) {
 
     fun onSubtitleSegment(
         view: SubtitleSegment,
+        subtitleStyle: InternalSubtitleSegmentStyle,
         type: SegmentType,
         spreadType: SegmentSpreadType,
         includeRipple: Boolean
     ) = view.apply {
+
+        updateStyles(subtitleStyle)
+
         with(style) {
 
             val state = buildSegmentStateDrawable(

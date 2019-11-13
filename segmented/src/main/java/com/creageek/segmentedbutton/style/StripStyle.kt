@@ -7,27 +7,27 @@ import com.creageek.segmentedbutton.*
 import kotlin.math.roundToInt
 
 data class InternalStripStyle(
-    var segmentGravity: SegmentGravity = SegmentGravity.top,
+    var segmentGravity: SegmentGravity? = null,
 
-    var spreadType: SegmentSpreadType = SegmentSpreadType.evenly,
+    var spreadType: SegmentSpreadType? = null,
 
-    var textSize: Int = 0,
-    var segmentHeight: Int = 0,
+    var textSize: Int? = null,
+    var segmentHeight: Int? = null,
 
-    var textColor: Int = 0,
-    var textColorSelected: Int = 0,
+    var textColor: Int? = null,
+    var textColorSelected: Int? = null,
     var segmentFont: Typeface? = null,
     var segmentFontChecked: Typeface? = null,
 
-    var borderColor: Int = 0,
-    var borderWidth: Int = 0,
-    var r: Float = 0.0f,
+    var borderColor: Int? = null,
+    var borderWidth: Int? = null,
+    var r: Float? = null,
 
-    var segmentColor: Int = 0,
-    var segmentColorSelected: Int = 0,
+    var segmentColor: Int? = null,
+    var segmentColorSelected: Int? = null,
 
-    var rippleColor: Int = 0,
-    var rippleColorSelected: Int = 0
+    var rippleColor: Int? = null,
+    var rippleColorSelected: Int? = null
 )
 
 

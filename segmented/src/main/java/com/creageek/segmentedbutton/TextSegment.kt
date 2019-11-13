@@ -20,13 +20,28 @@ import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.RadioButton
+import com.creageek.segmentedbutton.style.InternalTextSegmentStyle
 import com.creageek.segmentedbutton.style.StripStyle
 import com.creageek.segmentedbutton.style.TextSegmentStyle
 import com.creageek.segmentedbutton.style.toTextSegmentStyle
 
 class TextSegment : RadioButton, Segment {
 
-    private val segmentStyle: TextSegmentStyle
+    private var segmentStyle: TextSegmentStyle
+        set(value) {
+            field = value
+            initSegment()
+        }
+
+    fun updateStyles(style: InternalTextSegmentStyle) {
+        style.textSize?.let { segmentStyle.textSize = it }
+        style.textColor?.let { segmentStyle.textColor = it }
+        style.textColorSelected?.let { segmentStyle.textColorSelected = it }
+        style.segmentFont?.let { segmentStyle.segmentFont = it }
+        style.segmentFontChecked?.let { segmentStyle.segmentFontChecked = it }
+
+        initSegment()
+    }
 
     constructor(context: Context, style: StripStyle) : this(context, null) {
         attachStripStyle(style)
@@ -41,8 +56,6 @@ class TextSegment : RadioButton, Segment {
             R.styleable.SegmentedButton,
             0, 0
         ).toTextSegmentStyle(context)
-
-        initSegment()
     }
 
     override fun onStateChanged(state: SegmentState) {

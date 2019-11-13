@@ -5,6 +5,35 @@ import android.content.res.TypedArray
 import android.graphics.Typeface
 import com.creageek.segmentedbutton.*
 
+data class InternalSubtitleSegmentStyle(
+    var titleType: TextType? = null,
+    var subTitleType: TextType? = null,
+    var upperTitleType: TextType? = null,
+
+    var titlePosition: TextPosition? = null,
+    var subTitlePosition: TextPosition? = null,
+    var upperTitlePosition: TextPosition? = null,
+
+    var textSize: Int? = null,
+    var subTitleTextSize: Int? = null,
+    var upperTitleTextSize: Int? = null,
+
+    var titleTextColor: Int? = null,
+    var subTitleTextColor: Int? = null,
+    var upperTitleTextColor: Int? = null,
+
+    var titleTextColorSelected: Int? = null,
+    var subTitleTextColorSelected: Int? = null,
+    var upperTitleTextColorSelected: Int? = null,
+
+    var titleFont: Typeface? = null,
+    var upperTitleFont: Typeface? = null,
+    var subTitleFont: Typeface? = null,
+
+    var titleFontChecked: Typeface? = null,
+    var subTitleFontChecked: Typeface? = null,
+    var upperTitleFontChecked: Typeface? = null
+)
 data class SubtitleSegmentStyle(
     var titleType: TextType = TextType.multiline,
     var subTitleType: TextType = TextType.multiline,
@@ -37,6 +66,30 @@ data class SubtitleSegmentStyle(
     // inner values
     val stateSelected = intArrayOf(android.R.attr.state_selected)
     val stateUnselected = intArrayOf(-android.R.attr.state_selected)
+
+    fun toInternalSubtitleSegmentStyle() = InternalSubtitleSegmentStyle(
+        titleType,
+        subTitleType,
+        upperTitleType,
+        titlePosition,
+        subTitlePosition,
+        upperTitlePosition,
+        textSize,
+        subTitleTextSize,
+        upperTitleTextSize,
+        titleTextColor,
+        subTitleTextColor,
+        upperTitleTextColor,
+        titleTextColorSelected,
+        subTitleTextColorSelected,
+        upperTitleTextColorSelected,
+        titleFont,
+        upperTitleFont,
+        subTitleFont,
+        titleFontChecked,
+        subTitleFontChecked,
+        upperTitleFontChecked
+    )
 }
 
 fun TypedArray.toSubtitleSegmentStyle(context: Context) = SubtitleSegmentStyle().apply {

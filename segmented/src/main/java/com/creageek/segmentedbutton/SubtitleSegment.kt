@@ -22,12 +22,45 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.creageek.segmentedbutton.style.InternalSubtitleSegmentStyle
 import com.creageek.segmentedbutton.style.SubtitleSegmentStyle
 import com.creageek.segmentedbutton.style.toSubtitleSegmentStyle
 
 class SubtitleSegment : LinearLayout, Segment {
 
-    private val subtitleSegmentStyle: SubtitleSegmentStyle
+    private var subtitleSegmentStyle: SubtitleSegmentStyle
+        set(value) {
+            field = value
+            initWithItems()
+        }
+
+    fun updateStyles(style: InternalSubtitleSegmentStyle) {
+        style.titleType?.let { subtitleSegmentStyle.titleType = it }
+        style.subTitleType?.let { subtitleSegmentStyle.subTitleType = it }
+        style.upperTitleType?.let { subtitleSegmentStyle.upperTitleType = it }
+        style.titlePosition?.let { subtitleSegmentStyle.titlePosition = it }
+        style.subTitlePosition?.let { subtitleSegmentStyle.subTitlePosition = it }
+        style.upperTitlePosition?.let { subtitleSegmentStyle.upperTitlePosition = it }
+        style.textSize?.let { subtitleSegmentStyle.textSize = it }
+        style.subTitleTextSize?.let { subtitleSegmentStyle.subTitleTextSize = it }
+        style.upperTitleTextSize?.let { subtitleSegmentStyle.upperTitleTextSize = it }
+        style.titleTextColor?.let { subtitleSegmentStyle.titleTextColor = it }
+        style.subTitleTextColor?.let { subtitleSegmentStyle.subTitleTextColor = it }
+        style.upperTitleTextColor?.let { subtitleSegmentStyle.upperTitleTextColor = it }
+        style.titleTextColorSelected?.let { subtitleSegmentStyle.titleTextColorSelected = it }
+        style.subTitleTextColorSelected?.let { subtitleSegmentStyle.subTitleTextColorSelected = it }
+        style.upperTitleTextColorSelected?.let {
+            subtitleSegmentStyle.upperTitleTextColorSelected = it
+        }
+        style.titleFont?.let { subtitleSegmentStyle.titleFont = it }
+        style.upperTitleFont?.let { subtitleSegmentStyle.upperTitleFont = it }
+        style.subTitleFont?.let { subtitleSegmentStyle.subTitleFont = it }
+        style.titleFontChecked?.let { subtitleSegmentStyle.titleFontChecked = it }
+        style.subTitleFontChecked?.let { subtitleSegmentStyle.subTitleFontChecked = it }
+        style.upperTitleFontChecked?.let { subtitleSegmentStyle.upperTitleFontChecked = it }
+
+        initWithItems()
+    }
 
     private val title: String?
     private val subTitle: String?
@@ -62,8 +95,6 @@ class SubtitleSegment : LinearLayout, Segment {
 
             recycle()
         }
-
-        initWithItems()
     }
 
     override fun onStateChanged(state: SegmentState) {
@@ -83,6 +114,8 @@ class SubtitleSegment : LinearLayout, Segment {
 
 
     private fun initWithItems() {
+        removeAllViews()
+
         with(subtitleSegmentStyle) {
             upperTitle?.let {
                 upperText = TextView(context).apply {
