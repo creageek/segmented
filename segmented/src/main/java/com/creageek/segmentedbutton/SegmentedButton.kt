@@ -64,7 +64,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
     private val stateChecked = intArrayOf(android.R.attr.state_checked)
     private val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
-
+  
     var checkedIndex: Int? = null
         private set
     private var checkedChild: RadioButton? = null
