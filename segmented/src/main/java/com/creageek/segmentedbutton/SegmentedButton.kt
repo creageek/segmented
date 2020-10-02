@@ -48,6 +48,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private var segmentFontChecked: Typeface? = null
 
     private val borderColor: Int
+    private val borderColorSelected: Int
     private val borderWidth: Int
     private val borderInnerWidth: Int
     private val r: Float
@@ -130,6 +131,11 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             borderColor = getColor(
                 R.styleable.SegmentedButton_borderColor,
                 ContextCompat.getColor(context, R.color.default_border_color)
+            )
+
+            borderColorSelected = getColor(
+                R.styleable.SegmentedButton_borderColorSelected,
+                ContextCompat.getColor(context, R.color.default_border_color_selected)
             )
 
             borderWidth = getDimensionPixelSize(
@@ -227,7 +233,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
             type,
             segmentColor,
             segmentColorSelected,
-            borderColor
+            borderColor,
+            borderColorSelected
         )
 
         val rippleState = wrapSegmentStateDrawableWithRipple(

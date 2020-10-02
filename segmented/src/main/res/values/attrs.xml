@@ -10,6 +10,7 @@
         <attr name="rippleColor" format="color"/>
         <attr name="rippleColorChecked" format="color"/>
         <attr name="borderColor" format="color"/>
+        <attr name="borderColorSelected" format="color"/>
         <attr name="borderWidth" format="dimension"/>
         <attr name="cornerRadius" format="dimension"/>
         <attr name="segmentFont" format="reference"/>

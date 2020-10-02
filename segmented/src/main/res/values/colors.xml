@@ -10,4 +10,5 @@
     <color name="default_ripple_color_checked">#C695A4</color>
 
     <color name="default_border_color">#e4e4e4</color>
+    <color name="default_border_color_selected">#7F6A93</color>
 </resources>
