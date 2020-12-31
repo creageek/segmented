@@ -15,6 +15,11 @@
         <attr name="segmentFont" format="reference"/>
         <attr name="segmentFontChecked" format="reference"/>
 
+        <attr name="orientation" format="enum">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr>
+
         <attr name="spreadType" format="enum">
             <enum name="evenly" value="0"/>
             <enum name="wrap" value="1"/>

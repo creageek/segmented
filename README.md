@@ -26,6 +26,7 @@ III. Declare `SegmentedButton` inside your `layout.xml` file:
            android:id="@+id/segmented"
            android:layout_width="0dp"
            android:layout_height="wrap_content"
+           app:orientation="horizontal|vertical" 
            app:layout_constraintTop_toTopOf="parent"
            app:layout_constraintStart_toStartOf="parent"
            app:layout_constraintEnd_toEndOf="parent"/>
