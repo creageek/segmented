@@ -38,6 +38,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
     // customizable values
     private val spreadType: SegmentSpreadType
+    private val segmentOrientation: SegmentOrientation
 
     private val textSize: Int
     private val segmentHeight: Int
@@ -87,12 +88,17 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
         with(a) {
 
-            // TODO add orientation handling
+            segmentOrientation =
+                SegmentOrientation.values()[getInt(
+                    R.styleable.SegmentedButton_orientation,
+                    SegmentOrientation.horizontal.value
+                )]
             spreadType =
                 SegmentSpreadType.values()[getInt(
                     R.styleable.SegmentedButton_spreadType,
                     SegmentSpreadType.wrap.value
                 )]
+
 
             textSize = getDimensionPixelSize(
                 R.styleable.SegmentedButton_textSize,
@@ -243,6 +249,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
         background = if (includeRipple) rippleState else state
         buttonDrawable = null
         gravity = CENTER
+        orientation = if (segmentOrientation == SegmentOrientation.horizontal) HORIZONTAL else VERTICAL
         layoutParams = LayoutParams(
             when (spreadType) {
                 SegmentSpreadType.evenly -> MATCH_PARENT

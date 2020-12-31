@@ -23,3 +23,7 @@ internal enum class SegmentType {
 internal enum class SegmentSpreadType(val value: Int) {
     evenly(0), wrap(1)
 }
+
+internal enum class SegmentOrientation(val value: Int) {
+    horizontal(0), vertical(1)
+}
