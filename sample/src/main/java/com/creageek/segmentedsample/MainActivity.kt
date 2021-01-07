@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
             // notifies when segment was checked
             onSegmentChecked { segment ->
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
+                filter.selectedIndex = filter.firstIndexOrNull(segment.text.toString())
             }
             // notifies when segment was unchecked
             onSegmentUnchecked { segment ->
@@ -44,6 +45,9 @@ class MainActivity : AppCompatActivity() {
         filter {
             // set initial checked segment (null by default)
             initialCheckedIndex = 2
+            onSegmentChecked { segment ->
+                segmented.selectedIndex = segmented.firstIndexOrNull(segment.text.toString())
+            }
         }
 
         rounded {

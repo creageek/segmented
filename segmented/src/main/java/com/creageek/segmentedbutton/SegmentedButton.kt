@@ -65,8 +65,11 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private val stateChecked = intArrayOf(android.R.attr.state_checked)
     private val stateUnchecked = intArrayOf(-android.R.attr.state_checked)
   
-    var checkedIndex: Int? = null
-        private set
+    private var checkedIndex: Int? = null
+    var selectedIndex : Int?
+        get() = checkedIndex
+        set(index) = changeCheckedIndex(index)
+
     private var checkedChild: RadioButton? = null
 
     private var onSegmentSelected: ((segment: RadioButton) -> Unit)? = null
@@ -193,6 +196,52 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
                 checkedIndex = indexOf
             }
         }
+    }
+    private fun changeCheckedIndex(indexOf : Int?){
+        if(indexOf != checkedIndex) {
+            checkedChild?.let { unselected->
+                unselected.typeface = segmentFont
+                unselected.isChecked = false
+            }
+            if(checkedIndex == null) {
+                // temporarily activate then deactivate any radio button but indexOf
+                // in order to trigger a transition at next step
+                // else, if we get back from null to last selected, it would not recolor
+                val altIndex = if (indexOf == 0) 1 else 0
+                (getChildAt(altIndex) as? RadioButton)?.let { tempSelected ->
+                    tempSelected.isChecked = true
+                    tempSelected.isChecked = false
+                }
+            }
+
+            if(indexOf in 0..childCount )
+            {
+                ( getChildAt(indexOf!!) as? RadioButton)?.let { selected ->
+                    selected.typeface = segmentFontChecked
+                    checkedChild = selected
+                    checkedIndex = indexOf
+
+                    selected.isChecked = true
+                }
+            }
+            else {
+                checkedChild = null
+                checkedIndex = null
+            }
+        }
+    }
+    /**
+     * firstIndexOrNull
+     * @param text   text of the segment to index
+     * @return       index of first segment with given text or null
+     */
+    fun firstIndexOrNull(text : String?): Int?{
+        for (i in 0..childCount) {
+            (getChildAt(i) as? RadioButton)?.text?.let {
+                if (it.toString() == text) {return i}
+            }
+        }
+        return null
     }
 
     private fun styleChildSegments(includeRipple: Boolean = true) {
