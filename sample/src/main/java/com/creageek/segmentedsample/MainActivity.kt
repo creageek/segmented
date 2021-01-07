@@ -26,7 +26,9 @@ class MainActivity : AppCompatActivity() {
             // notifies when segment was checked
             onSegmentChecked { segment ->
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
-                // adapt filter segment to keep it consistent with current segment
+            }
+            // adapt filter segment to keep it consistent with current segment
+            postSegmentChecked { segment ->
                 filter.selectedIndex = filter.firstIndexOrNull(segment.text.toString())
             }
             // notifies when segment was unchecked
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             // set initial checked segment (null by default)
             initialCheckedIndex = 2
             // adapt segmented segment to keep it consistent with current segment
-            onSegmentChecked { segment ->
+            postSegmentChecked { segment ->
                 segmented.selectedIndex = segmented.firstIndexOrNull(segment.text.toString())
             }
         }
