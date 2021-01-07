@@ -47,9 +47,13 @@ segmented {
             listOf("Today", "This week", "This month")
         }
 
-        // notifies when segment was checked
+        // notifies when segment is beeing checked (selectedIndex not yet modified)
         onSegmentChecked { segment ->
-            Log.d("creageek:segmented", "Segment ${segment.text} checked")
+            Log.d("creageek:segmented", "Segment ${segment.text} checked old selectedIndex %d ".format(selectedIndex))
+        }
+        // notifies when segment was checked (selectedIndex modified)
+        postSegmentChecked { segment ->
+            Log.d("creageek:segmented", "Segment ${segment.text} checked new selectedIndex %d ".format(selectedIndex))
         }
         // notifies when segment was unchecked
         onSegmentUnchecked { segment ->
@@ -61,6 +65,20 @@ segmented {
         }
 }
 ```
+
+V. Change segment programmatically.
+
+```kotlin
+        //   set selected segment by index
+        segmented.selectedIndex = 1 
+
+        // unselect all segments
+        segmented.selectedIndex = null // or any Int out of range eg segmented.selectedIndex = -1
+        
+        // set  selected segment by text
+        segmented.selectedIndex = segmented.firstIndexOrNull(text)
+```
+
 ## How to customize?
 I. In your `layout.xml` file you can set a few attrs to `SegmentedButton`:
 * `app:textSize` - applies text size to all child segments (reference to a dimension).

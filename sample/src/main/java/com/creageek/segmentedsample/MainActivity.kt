@@ -1,5 +1,6 @@
 package com.creageek.segmentedsample
-
+// edited by Pomacanthus
+// add logic to demonstrate the use of settable selectedIndex
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
             // notifies when segment was checked
             onSegmentChecked { segment ->
                 Log.d("creageek:segmented", "Segment ${segment.text} checked")
+                // adapt filter segment to keep it consistent with current segment
                 filter.selectedIndex = filter.firstIndexOrNull(segment.text.toString())
             }
             // notifies when segment was unchecked
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         filter {
             // set initial checked segment (null by default)
             initialCheckedIndex = 2
+            // adapt segmented segment to keep it consistent with current segment
             onSegmentChecked { segment ->
                 segmented.selectedIndex = segmented.firstIndexOrNull(segment.text.toString())
             }

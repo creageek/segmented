@@ -14,6 +14,14 @@
  * limitations under the License.
  */
 
+/*
+ * edited by Pomacanthus
+ * add var selectedIndex with public get and set
+ * add postSegmentSelected to perform additional action after the segment has been changed
+ * (required to cancel a movement)
+ * add public fun firstIndexOrNull
+ */
+
 package com.creageek.segmentedbutton
 
 import android.content.Context
@@ -73,6 +81,7 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
     private var checkedChild: RadioButton? = null
 
     private var onSegmentSelected: ((segment: RadioButton) -> Unit)? = null
+    private var postSegmentSelected: ((segment: RadioButton) -> Unit)? = null
     private var onSegmentReselected: ((segment: RadioButton) -> Unit)? = null
     private var onSegmentUnselected: ((segment: RadioButton) -> Unit)? = null
 
@@ -194,6 +203,8 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
                 }
                 checkedChild = selected
                 checkedIndex = indexOf
+                postSegmentSelected?.invoke(selected)
+
             }
         }
     }
@@ -405,6 +416,10 @@ class SegmentedButton : RadioGroup, View.OnClickListener {
 
     fun onSegmentChecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
         onSegmentSelected = { block(it) }
+    }
+
+    fun postSegmentChecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
+        postSegmentSelected = { block(it) }
     }
 
     fun onSegmentRechecked(block: SegmentedButton.(segment: RadioButton) -> Unit) {
